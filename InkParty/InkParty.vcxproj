@@ -11,10 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\IKPApp.h" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\system\INKApp.cpp" />
+    <ClCompile Include="src\system\INKFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\IKPApp.cpp" />
+    <ClInclude Include="includes\event\INKEventListener.h" />
+    <ClInclude Include="includes\event\INKEventManager.h" />
+    <ClInclude Include="includes\event\INKKeyboardEvent.h" />
+    <ClInclude Include="includes\event\INKQuitEvent.h" />
+    <ClInclude Include="includes\system\INKApp.h" />
+    <ClInclude Include="includes\system\INKFrame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7D296498-CCE1-4D0B-80CC-772DD717CB2A}</ProjectGuid>

@@ -13,15 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\system">
+      <UniqueIdentifier>{5fde11c7-63e1-42a9-9fc2-25e8623cc5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\system">
+      <UniqueIdentifier>{7a7fb21d-dde8-470a-a12b-65c110cc7362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\event">
+      <UniqueIdentifier>{46ba5df7-4d4f-4ef6-9165-958c16cd81db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\event">
+      <UniqueIdentifier>{01a9af41-eb78-43c1-8a3d-2a8f731170ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\IKPApp.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\IKPApp.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\system\INKApp.cpp">
+      <Filter>Fichiers sources\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\INKFrame.cpp">
+      <Filter>Fichiers sources\system</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="includes\system\INKApp.h">
+      <Filter>Fichiers d%27en-tête\system</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\system\INKFrame.h">
+      <Filter>Fichiers d%27en-tête\system</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\event\INKEventManager.h">
+      <Filter>Fichiers d%27en-tête\event</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\event\INKEventListener.h">
+      <Filter>Fichiers d%27en-tête\event</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\event\INKQuitEvent.h">
+      <Filter>Fichiers d%27en-tête\event</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\event\INKKeyboardEvent.h">
+      <Filter>Fichiers d%27en-tête\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
