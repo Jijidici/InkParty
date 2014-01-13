@@ -31,6 +31,8 @@ void INKFrame::init(int iFps) {
 	if(!SDL_SetVideoMode(_iW, _iH, _iBbp, SDL_OPENGL)) {
         throw std::runtime_error("Unable to open a window");
     }
+
+	SDL_EnableUNICODE(SDL_ENABLE);
 }
 
 void INKFrame::quit() {

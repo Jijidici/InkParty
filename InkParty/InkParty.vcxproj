@@ -11,14 +11,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\event\INKEvent.cpp" />
+    <ClCompile Include="src\event\INKEventListener.cpp" />
+    <ClCompile Include="src\event\INKEventManager.cpp" />
+    <ClCompile Include="src\event\INKKeyEvent.cpp" />
+    <ClCompile Include="src\event\INKQuitEvent.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\system\INKApp.cpp" />
     <ClCompile Include="src\system\INKFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\event\INKEvent.h" />
     <ClInclude Include="includes\event\INKEventListener.h" />
     <ClInclude Include="includes\event\INKEventManager.h" />
-    <ClInclude Include="includes\event\INKKeyboardEvent.h" />
+    <ClInclude Include="includes\event\INKKeyEvent.h" />
     <ClInclude Include="includes\event\INKQuitEvent.h" />
     <ClInclude Include="includes\system\INKApp.h" />
     <ClInclude Include="includes\system\INKFrame.h" />

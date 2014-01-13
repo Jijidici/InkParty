@@ -36,6 +36,21 @@
     <ClCompile Include="src\system\INKFrame.cpp">
       <Filter>Fichiers sources\system</Filter>
     </ClCompile>
+    <ClCompile Include="src\event\INKEventListener.cpp">
+      <Filter>Fichiers sources\event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\event\INKEventManager.cpp">
+      <Filter>Fichiers sources\event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\event\INKKeyEvent.cpp">
+      <Filter>Fichiers sources\event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\event\INKQuitEvent.cpp">
+      <Filter>Fichiers sources\event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\event\INKEvent.cpp">
+      <Filter>Fichiers sources\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -53,7 +68,10 @@
     <ClInclude Include="includes\event\INKQuitEvent.h">
       <Filter>Fichiers d%27en-tête\event</Filter>
     </ClInclude>
-    <ClInclude Include="includes\event\INKKeyboardEvent.h">
+    <ClInclude Include="includes\event\INKKeyEvent.h">
+      <Filter>Fichiers d%27en-tête\event</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\event\INKEvent.h">
       <Filter>Fichiers d%27en-tête\event</Filter>
     </ClInclude>
   </ItemGroup>
