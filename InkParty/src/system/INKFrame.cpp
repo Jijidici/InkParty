@@ -28,7 +28,7 @@ void INKFrame::init(int iFps) {
 	SDL_WM_SetCaption(_strTitle.c_str(), 0);
 
 	//open the window
-	if(!SDL_SetVideoMode(_iW, _iH, _iBbp, SDL_OPENGL)) {
+	if(!SDL_SetVideoMode(_iW, _iH, _iBbp, SDL_OPENGL | SDL_GL_DOUBLEBUFFER )) {
         throw std::runtime_error("Unable to open a window");
     }
 
