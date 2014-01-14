@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "renderer/INKRenderable.h"
+#include "renderer/INKGLProgram.h"
 
 class INKRenderer {
 public:
@@ -18,11 +19,15 @@ public:
 
 	INKSquareShape*	getSquare();
 
+	INKGLProgram*	getDefaultShaderProgram();
+
 private:
 	INKRenderer();
 	~INKRenderer();
 
 	INKSquareShape* _pSquareModel;
+
+	INKGLProgram*	_pDefaultShaderProgram;
 };
 
 #endif //__INK_RENDERER_H__

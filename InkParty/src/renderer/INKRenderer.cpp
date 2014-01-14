@@ -45,6 +45,15 @@ INKSquareShape* INKRenderer::getSquare() {
 	return _pSquareModel;
 }
 
+INKGLProgram* INKRenderer::getDefaultShaderProgram() {
+	if(_pDefaultShaderProgram == nullptr) {
+		_pDefaultShaderProgram = new INKGLProgram();
+		_pDefaultShaderProgram->buildProgram(INKGLProgram::defaultVS, INKGLProgram::defaultFS);
+	}
+	
+	return _pDefaultShaderProgram;
+}
+
 INKRenderer::INKRenderer() 
 	: _pSquareModel(nullptr) {
 

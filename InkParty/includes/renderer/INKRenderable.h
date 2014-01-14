@@ -6,6 +6,7 @@
 #define __INK_RENDERABLE_H__
 
 #include "renderer/shapes/INKSquareShape.h"
+#include "renderer/INKGLProgram.h"
 
 class INKRenderable {
 public:
@@ -16,6 +17,7 @@ public:
 
 private:
 	INKSquareShape* _pShape;
+	INKGLProgram*	_pProgram;
 };
 
 #endif //__INK_RENDERABLE_H__
