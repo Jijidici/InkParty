@@ -31,6 +31,12 @@
     <Filter Include="Fichiers d%27en-tête\renderer">
       <UniqueIdentifier>{870641d8-955a-483e-93d8-545b2a399772}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\renderer\shapes">
+      <UniqueIdentifier>{6f022fd6-09e7-4a7f-aa1d-7f1460bcf0a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\renderer\shapes">
+      <UniqueIdentifier>{6de5ac96-5202-4f26-be07-6479ecfea3c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -60,6 +66,9 @@
     <ClCompile Include="src\renderer\INKRenderer.cpp">
       <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\shapes\INKSquareShape.cpp">
+      <Filter>Fichiers sources\renderer\shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -85,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="includes\renderer\INKRenderer.h">
       <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shapes\INKSquareShape.h">
+      <Filter>Fichiers d%27en-tête\renderer\shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
