@@ -37,6 +37,12 @@
     <Filter Include="Fichiers sources\renderer\shapes">
       <UniqueIdentifier>{6de5ac96-5202-4f26-be07-6479ecfea3c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\math">
+      <UniqueIdentifier>{cad23680-4ba9-4ffb-ab2b-0221bd21421e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\math">
+      <UniqueIdentifier>{3cf5a736-cc58-49ff-a86d-4c3aa57baaaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -75,6 +81,9 @@
     <ClCompile Include="src\renderer\INKGLProgram.cpp">
       <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\math\INKMatrixStack.cpp">
+      <Filter>Fichiers sources\math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -109,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="includes\renderer\INKGLProgram.h">
       <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\math\INKMatrixStack.h">
+      <Filter>Fichiers d%27en-tête\math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
