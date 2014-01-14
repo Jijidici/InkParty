@@ -27,16 +27,34 @@ void INKRenderer::init() {
 	glClearColor(0.1f, 0.2f, 0.3f, 1.f);
 }
 
-void INKRenderer::render() {
+void INKRenderer::render(std::vector<INKRenderable*>& toRender) {
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	for(std::vector<INKRenderable*>::iterator itRend=toRender.begin(); itRend!=toRender.end(); ++itRend) {
+		(*itRend)->render();
+	}
 
 	SDL_GL_SwapBuffers();
 }
 
-INKRenderer::INKRenderer() {
+INKSquareShape* INKRenderer::getSquare() {
+	if(_pSquareModel == nullptr) {
+		_pSquareModel = new INKSquareShape();
+	}
+
+	return _pSquareModel;
+}
+
+INKRenderer::INKRenderer() 
+	: _pSquareModel(nullptr) {
 
 }
 
 INKRenderer::~INKRenderer() {
+	if(_pSquareModel != nullptr) {
+		delete _pSquareModel;
+		_pSquareModel = nullptr;
+	}
+
 	_pInstance = nullptr;
 }

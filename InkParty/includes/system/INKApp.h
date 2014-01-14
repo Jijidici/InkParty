@@ -5,7 +5,9 @@
 #ifndef __IKP_APP_H__
 #define __IKP_APP_H__
 
+#include <vector>
 #include "system/INKFrame.h"
+#include "renderer/INKRenderable.h"
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
 
@@ -24,6 +26,7 @@ private:
 
 	INKFrame*	_pMainFrame;
 	bool		_bLoop;
+	std::vector<INKRenderable*> particles;
 };
 
 #endif
