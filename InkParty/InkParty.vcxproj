@@ -17,6 +17,7 @@
     <ClCompile Include="src\event\INKKeyEvent.cpp" />
     <ClCompile Include="src\event\INKQuitEvent.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\renderer\INKRenderable.cpp" />
     <ClCompile Include="src\renderer\INKRenderer.cpp" />
     <ClCompile Include="src\renderer\shapes\INKSquareShape.cpp" />
     <ClCompile Include="src\system\INKApp.cpp" />
@@ -28,6 +29,7 @@
     <ClInclude Include="includes\event\INKEventManager.h" />
     <ClInclude Include="includes\event\INKKeyEvent.h" />
     <ClInclude Include="includes\event\INKQuitEvent.h" />
+    <ClInclude Include="includes\renderer\INKRenderable.h" />
     <ClInclude Include="includes\renderer\INKRenderer.h" />
     <ClInclude Include="includes\renderer\shapes\INKSquareShape.h" />
     <ClInclude Include="includes\system\INKApp.h" />
