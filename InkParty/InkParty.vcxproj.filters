@@ -25,6 +25,12 @@
     <Filter Include="Fichiers sources\event">
       <UniqueIdentifier>{01a9af41-eb78-43c1-8a3d-2a8f731170ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\renderer">
+      <UniqueIdentifier>{9799a4ee-5e1a-4cfa-a533-615e91c0e0f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\renderer">
+      <UniqueIdentifier>{870641d8-955a-483e-93d8-545b2a399772}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -51,6 +57,9 @@
     <ClCompile Include="src\event\INKEvent.cpp">
       <Filter>Fichiers sources\event</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\INKRenderer.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -73,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="includes\event\INKEvent.h">
       <Filter>Fichiers d%27en-tête\event</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\INKRenderer.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

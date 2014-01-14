@@ -4,9 +4,8 @@
 
 #include "system/INKApp.h"
 
-#include <iostream>
 #include "SDL.h"
-
+#include "renderer/INKRenderer.h"
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
@@ -37,9 +36,14 @@ void INKApp::onEvent(INKEvent* pE) {
 }
 
 void INKApp::init() {
+	//frame
 	_pMainFrame = new INKFrame("INK PARTY !", 400, 600, 32);
 	_pMainFrame->init(60);
 
+	//renderer
+	INKRenderer::getInstance()->init();
+
+	//events
 	INKEventManager::getInstance()->addListener(this, eQuitEvent);
 	INKEventManager::getInstance()->addListener(this, eKeyEvent);
 }
@@ -49,6 +53,8 @@ void INKApp::launch() {
 
 	while(_bLoop) {
 		_pMainFrame->saveFrameStartTime();
+
+		INKRenderer::getInstance()->render();
 
 		INKEventManager::getInstance()->manageEvent(_pMainFrame);
 
