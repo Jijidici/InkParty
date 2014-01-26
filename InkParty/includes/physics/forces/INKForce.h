@@ -12,7 +12,7 @@ public:
 	INKForce();
 	virtual ~INKForce();
 
-	virtual void apply(INKParticleSystem& system) = 0;
+	virtual void apply(INKParticleSystem* pSystem) = 0;
 };
 
-#endif
+#endif // __INK_FORCE_H__

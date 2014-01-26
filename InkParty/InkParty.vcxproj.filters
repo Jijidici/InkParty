@@ -52,6 +52,12 @@
     <Filter Include="Fichiers sources\physics">
       <UniqueIdentifier>{ad56501a-9cac-4494-a577-ca987771a3d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\physics\forces">
+      <UniqueIdentifier>{1095eb02-af58-4d37-9cb6-ed35c4d5c881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\physics\forces">
+      <UniqueIdentifier>{bcfa37ce-ef61-4dad-94a0-f0b5a5d19cab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -97,6 +103,12 @@
       <Filter>Fichiers sources\system</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\INKParticle.cpp">
+      <Filter>Fichiers sources\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\forces\INKForce.cpp">
+      <Filter>Fichiers sources\physics\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\INKParticleSystem.cpp">
       <Filter>Fichiers sources\physics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,6 +159,12 @@
       <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
     </ClInclude>
     <ClInclude Include="includes\physics\INKParticle.h">
+      <Filter>Fichiers d%27en-tête\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\physics\forces\INKForce.h">
+      <Filter>Fichiers d%27en-tête\physics\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\physics\INKParticleSystem.h">
       <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
   </ItemGroup>
