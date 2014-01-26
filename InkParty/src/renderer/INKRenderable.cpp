@@ -10,7 +10,10 @@
 #include "renderer/shapes/INKSquareShape.h"
 
 INKRenderable::INKRenderable(INKSquareShape* pShape)
-	: _pShape(pShape)
+	: _position(glm::vec3(0.f))
+	, _scale(glm::vec3(1.f))
+	, _fRotation(0.f)
+	, _pShape(pShape)
 	, _pProgram(INKRenderer::getInstance()->getDefaultShaderProgram()){
 
 }

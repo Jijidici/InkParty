@@ -50,12 +50,13 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	INKRenderable* pTest = new INKRenderable(INKRenderer::getInstance()->getSquare());
-	pTest->setPosition(glm::vec3(-5., 2., 0.));
-	pTest ->setScale(glm::vec3(8.f, 8.f, 1.f));
-	pTest->setRotation(35.);
-
-	INKRenderer::getInstance()->add(pTest);
+	for(int i=-4; i<5; ++i) {
+		for(int j = -4; j<5; ++j) {
+			INKRenderable* pTest = new INKRenderable(INKRenderer::getInstance()->getSquare());
+			pTest->setPosition(glm::vec3(2.f*i, 2.f*j, 0.f));
+			INKRenderer::getInstance()->add(pTest);
+		}
+	}
 	//test zone
 }
 
