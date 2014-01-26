@@ -41,15 +41,12 @@ void INKApp::init() {
 	_pMainFrame = new INKFrame("INK PARTY !", 400, 600, 32);
 	_pMainFrame->init(60);
 
-	//renderer
-	INKRenderer::getInstance()->init();
-
 	//events
 	INKEventManager::getInstance()->addListener(this, eQuitEvent);
 	INKEventManager::getInstance()->addListener(this, eKeyEvent);
 
 	//test zone
-	particles.push_back(new INKRenderable(INKRenderer::getInstance()->getSquare()));
+	INKRenderer::getInstance()->add(new INKRenderable(INKRenderer::getInstance()->getSquare()));
 	//test zone
 }
 
@@ -59,7 +56,7 @@ void INKApp::launch() {
 	while(_bLoop) {
 		_pMainFrame->saveFrameStartTime();
 
-		INKRenderer::getInstance()->render(particles);
+		INKRenderer::getInstance()->render();
 
 		INKEventManager::getInstance()->manageEvent(_pMainFrame);
 
@@ -74,6 +71,4 @@ void INKApp::quit() {
 		delete _pMainFrame;
 		_pMainFrame = 0;
 	}
-
-	particles.clear();
 }

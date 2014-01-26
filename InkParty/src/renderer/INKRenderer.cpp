@@ -10,9 +10,31 @@
 
 static INKRenderer* _pInstance = nullptr;
 
+INKRenderer::INKRenderer() 
+	: _pSquareModel(nullptr) {
+
+}
+
+INKRenderer::~INKRenderer() {
+	if(_pSquareModel != nullptr) {
+		delete _pSquareModel;
+
+		for(std::vector<INKRenderable*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
+			delete *itRend;
+			*itRend = nullptr;
+		}
+		_toRender.clear();
+
+		_pSquareModel = nullptr;
+	}
+
+	_pInstance = nullptr;
+}
+
 INKRenderer* INKRenderer::getInstance() {
 	if(_pInstance == nullptr) {
 		_pInstance = new INKRenderer();
+		_pInstance->init();
 	}
 
 	return _pInstance;
@@ -27,14 +49,18 @@ void INKRenderer::init() {
 	glClearColor(0.1f, 0.2f, 0.3f, 1.f);
 }
 
-void INKRenderer::render(std::vector<INKRenderable*>& toRender) {
+void INKRenderer::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for(std::vector<INKRenderable*>::iterator itRend=toRender.begin(); itRend!=toRender.end(); ++itRend) {
+	for(std::vector<INKRenderable*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
 		(*itRend)->render();
 	}
 
 	SDL_GL_SwapBuffers();
+}
+
+void INKRenderer::add(INKRenderable* aRenderable) {
+	_toRender.push_back(aRenderable);
 }
 
 INKSquareShape* INKRenderer::getSquare() {
@@ -52,18 +78,4 @@ INKGLProgram* INKRenderer::getDefaultShaderProgram() {
 	}
 	
 	return _pDefaultShaderProgram;
-}
-
-INKRenderer::INKRenderer() 
-	: _pSquareModel(nullptr) {
-
-}
-
-INKRenderer::~INKRenderer() {
-	if(_pSquareModel != nullptr) {
-		delete _pSquareModel;
-		_pSquareModel = nullptr;
-	}
-
-	_pInstance = nullptr;
 }

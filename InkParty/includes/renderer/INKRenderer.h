@@ -14,20 +14,22 @@ class INKRenderer {
 public:
 	static INKRenderer* getInstance();
 	
-	void			init();
-	void			render(std::vector<INKRenderable*>& toRender);
+	void			render();
+	void			add(INKRenderable* aRenderable);
 
 	INKSquareShape*	getSquare();
-
 	INKGLProgram*	getDefaultShaderProgram();
 
-private:
+protected:
 	INKRenderer();
 	~INKRenderer();
 
-	INKSquareShape* _pSquareModel;
+	void			init();
 
+	INKSquareShape* _pSquareModel;
 	INKGLProgram*	_pDefaultShaderProgram;
+
+	std::vector<INKRenderable*> _toRender;
 };
 
 #endif //__INK_RENDERER_H__

@@ -26,7 +26,6 @@ private:
 
 	INKFrame*	_pMainFrame;
 	bool		_bLoop;
-	std::vector<INKRenderable*> particles;
 };
 
 #endif
