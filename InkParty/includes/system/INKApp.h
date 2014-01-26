@@ -11,6 +11,7 @@
 #include "renderer/INKRenderable.h"
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
+#include "physics/INKParticleSystem.h"
 
 class INKApp : public INKEventListener {
 public:
@@ -25,10 +26,11 @@ private:
 	void launch		();
 	void quit		();
 
-	INKFrame*	_pMainFrame;
-	bool		_bLoop;
+	INKFrame*			_pMainFrame;
+	bool				_bLoop;
 
-	INKCamera*	_pCamera;
+	INKCamera*			_pCamera;
+	INKParticleSystem*	_pPartSystem;
 };
 
 #endif

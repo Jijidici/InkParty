@@ -17,3 +17,8 @@ INKParticle::INKParticle()
 INKParticle::~INKParticle() {
 
 }
+
+void INKParticle::setMass(float fMass) {
+	_fMass = fMass;
+	_scale = glm::vec3(fMass);
+}

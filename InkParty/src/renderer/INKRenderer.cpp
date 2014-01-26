@@ -22,10 +22,6 @@ INKRenderer::~INKRenderer() {
 	if(_pSquareModel != nullptr) {
 		delete _pSquareModel;
 
-		for(std::vector<INKRenderable*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
-			delete *itRend;
-			*itRend = nullptr;
-		}
 		_toRender.clear();
 
 		_pSquareModel = nullptr;
@@ -64,6 +60,12 @@ void INKRenderer::render() {
 
 void INKRenderer::add(INKRenderable* aRenderable) {
 	_toRender.push_back(aRenderable);
+}
+
+void INKRenderer::add(std::vector<INKRenderable*> renderables) {
+	for(std::vector<INKRenderable*>::iterator it=renderables.begin(); it!=renderables.end(); ++it) {
+		add(*it);
+	}
 }
 
 INKSquareShape* INKRenderer::getSquare() {

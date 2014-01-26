@@ -17,6 +17,7 @@ public:
 	
 	void			render();
 	void			add(INKRenderable* aRenderable);
+	void			add(std::vector<INKRenderable*> renderables);
 
 	INKSquareShape*	getSquare();
 	INKGLProgram*	getDefaultShaderProgram();

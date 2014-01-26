@@ -50,13 +50,12 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	for(int i=-4; i<5; ++i) {
-		for(int j = -4; j<5; ++j) {
-			INKParticle* pTest = new INKParticle();
-			pTest->setPosition(glm::vec3(2.f*i, 2.f*j, 0.f));
-			INKRenderer::getInstance()->add(pTest);
-		}
+	_pPartSystem = new INKParticleSystem();
+	_pPartSystem->addRandomParticles(256, 10.);
+	for(int i=0; i<_pPartSystem->getParticlesCount(); ++i) {
+		INKRenderer::getInstance()->add(_pPartSystem->getRenderableParticle(i));
 	}
+	
 	//test zone
 }
 
