@@ -46,6 +46,9 @@ void INKApp::init() {
 	INKEventManager::getInstance()->addListener(this, eKeyEvent);
 
 	//test zone
+	_pCamera = new INKCamera(_pMainFrame->getRatio());
+	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
+
 	INKRenderer::getInstance()->add(new INKRenderable(INKRenderer::getInstance()->getSquare()));
 	//test zone
 }

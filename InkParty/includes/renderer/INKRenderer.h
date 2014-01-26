@@ -9,6 +9,7 @@
 
 #include "renderer/INKRenderable.h"
 #include "renderer/INKGLProgram.h"
+#include "system/INKCamera.h"
 
 class INKRenderer {
 public:
@@ -20,6 +21,9 @@ public:
 	INKSquareShape*	getSquare();
 	INKGLProgram*	getDefaultShaderProgram();
 
+	void			setCurrentCamera(INKCamera* pCamera) { _pCurrentCamera = pCamera; }
+	INKCamera*		getCurrentCamera() { return _pCurrentCamera; }
+
 protected:
 	INKRenderer();
 	~INKRenderer();
@@ -30,6 +34,8 @@ protected:
 	INKGLProgram*	_pDefaultShaderProgram;
 
 	std::vector<INKRenderable*> _toRender;
+
+	INKCamera* _pCurrentCamera;
 };
 
 #endif //__INK_RENDERER_H__

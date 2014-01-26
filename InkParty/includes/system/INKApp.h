@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "system/INKFrame.h"
+#include "system/INKCamera.h"
 #include "renderer/INKRenderable.h"
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
@@ -26,6 +27,8 @@ private:
 
 	INKFrame*	_pMainFrame;
 	bool		_bLoop;
+
+	INKCamera*	_pCamera;
 };
 
 #endif
