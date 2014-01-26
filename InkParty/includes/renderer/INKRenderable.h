@@ -12,7 +12,7 @@
 class INKRenderable {
 public:
 					INKRenderable(INKSquareShape* pShape);
-					~INKRenderable();
+	virtual			~INKRenderable();
 
 	void			render();
 
@@ -24,7 +24,7 @@ public:
 	void			setScale(glm::vec3 scale) { _scale = scale; }
 	void			setRotation(float fRotation) { _fRotation = fRotation; }
 
-private:
+protected:
 	glm::vec3		_position;
 	glm::vec3		_scale;
 	float			_fRotation;

@@ -18,6 +18,7 @@
     <ClCompile Include="src\event\INKQuitEvent.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\math\INKMatrixStack.cpp" />
+    <ClCompile Include="src\physics\INKParticle.cpp" />
     <ClCompile Include="src\renderer\INKGLProgram.cpp" />
     <ClCompile Include="src\renderer\INKRenderable.cpp" />
     <ClCompile Include="src\renderer\INKRenderer.cpp" />
@@ -33,6 +34,7 @@
     <ClInclude Include="includes\event\INKKeyEvent.h" />
     <ClInclude Include="includes\event\INKQuitEvent.h" />
     <ClInclude Include="includes\math\INKMatrixStack.h" />
+    <ClInclude Include="includes\physics\INKParticle.h" />
     <ClInclude Include="includes\renderer\INKGLProgram.h" />
     <ClInclude Include="includes\renderer\INKRenderable.h" />
     <ClInclude Include="includes\renderer\INKRenderer.h" />

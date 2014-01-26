@@ -7,10 +7,10 @@
 #include "SDL.h"
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
-#include "renderer/INKRenderable.h"
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
+#include "physics/INKParticle.h"
 
 INKApp::INKApp() 
 	: _pMainFrame(0)
@@ -52,7 +52,7 @@ void INKApp::init() {
 
 	for(int i=-4; i<5; ++i) {
 		for(int j = -4; j<5; ++j) {
-			INKRenderable* pTest = new INKRenderable(INKRenderer::getInstance()->getSquare());
+			INKParticle* pTest = new INKParticle();
 			pTest->setPosition(glm::vec3(2.f*i, 2.f*j, 0.f));
 			INKRenderer::getInstance()->add(pTest);
 		}

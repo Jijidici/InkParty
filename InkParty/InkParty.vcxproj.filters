@@ -46,6 +46,12 @@
     <Filter Include="Fichiers d%27en-tête\renderer\shaders">
       <UniqueIdentifier>{594ae3af-54b8-4c88-9cf4-22288289461b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\physics">
+      <UniqueIdentifier>{d477dbe9-7a2c-410c-84c5-2b5f7a4e5985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\physics">
+      <UniqueIdentifier>{ad56501a-9cac-4494-a577-ca987771a3d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -89,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="src\system\INKCamera.cpp">
       <Filter>Fichiers sources\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\INKParticle.cpp">
+      <Filter>Fichiers sources\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="includes\renderer\shaders\fs_default.h">
       <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\physics\INKParticle.h">
+      <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
