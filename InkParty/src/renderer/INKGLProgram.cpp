@@ -6,6 +6,10 @@
 
 #include <iostream>
 #include "GL/glew.h"
+#include "gtc/type_ptr.hpp"
+
+#include "renderer/INKRenderer.h"
+#include "system/INKCamera.h"
 
 #define GL_STRINGIFY(s) #s
 
@@ -30,7 +34,10 @@ GL_STRINGIFY(
 );
 
 INKGLProgram::INKGLProgram()
-	: _program(0) {
+	: _program(0)
+	, _modelMatrixLocation(-1)
+	, _viewMatrixLocation(-1)
+	, _projectionMatrixLocation(-1) {
 
 }
 
@@ -133,9 +140,31 @@ void INKGLProgram::buildProgram(const GLchar* vertexShaderSource, const GLchar* 
 		throw std::runtime_error("Error while linking shader program");
     }
 
+	initUniformLocations();
+
 	_program = program;
 }
 
 void INKGLProgram::use() {
 	glUseProgram(_program);
+}
+
+void INKGLProgram::updateUniforms() {
+	INKCamera* pCurrentCamera = INKRenderer::getInstance()->getCurrentCamera();
+	if(pCurrentCamera != nullptr) {
+		glUniformMatrix4fv(_viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(pCurrentCamera->getView()));
+		glUniformMatrix4fv(_projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(pCurrentCamera->getProjection()));
+	}
+}
+
+void INKGLProgram::sendModelUniform(const glm::mat4& modelMatrix) {
+	glUniformMatrix4fv(_modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+}
+
+void INKGLProgram::initUniformLocations() {
+	_modelMatrixLocation = glGetUniformLocation(_program, "uModelMat");
+	_viewMatrixLocation = glGetUniformLocation(_program, "uViewMat");
+	_projectionMatrixLocation = glGetUniformLocation(_program, "uProjMat");
+
+	updateUniforms();
 }
