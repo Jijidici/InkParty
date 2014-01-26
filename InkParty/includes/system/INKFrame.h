@@ -20,7 +20,7 @@ public:
 	inline void saveFrameStartTime	() { _iFrameStartTime = SDL_GetTicks(); }
 	inline void	setFPS				(int iFps) { _iFps = iFps; _iFrameDuration = 1000 / iFps; }
 	float		computeFrameTime	();
-	float		getRatio			() { return static_cast<float>(_iW)/static_cast<float>(_iH); }
+	float		getRatio			() { return static_cast<float>(_iH)/static_cast<float>(_iW); }
 
 protected:
 	std::string _strTitle;
