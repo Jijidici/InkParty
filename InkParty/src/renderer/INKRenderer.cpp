@@ -8,6 +8,9 @@
 #include "GL/glew.h"
 #include "SDL.h"
 
+#include "renderer/shaders/vs_default.h"
+#include "renderer/shaders/fs_default.h"
+
 static INKRenderer* _pInstance = nullptr;
 
 INKRenderer::INKRenderer() 
@@ -74,7 +77,7 @@ INKSquareShape* INKRenderer::getSquare() {
 INKGLProgram* INKRenderer::getDefaultShaderProgram() {
 	if(_pDefaultShaderProgram == nullptr) {
 		_pDefaultShaderProgram = new INKGLProgram();
-		_pDefaultShaderProgram->buildProgram(INKGLProgram::defaultVS, INKGLProgram::defaultFS);
+		_pDefaultShaderProgram->buildProgram(inkshaders::vs_default, inkshaders::fs_default);
 	}
 	
 	return _pDefaultShaderProgram;

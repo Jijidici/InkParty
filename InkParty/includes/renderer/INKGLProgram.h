@@ -10,9 +10,6 @@
 
 class INKGLProgram {
 public:
-	static const GLchar* defaultVS;
-	static const GLchar* defaultFS;
-
 					INKGLProgram();
 					~INKGLProgram();
 

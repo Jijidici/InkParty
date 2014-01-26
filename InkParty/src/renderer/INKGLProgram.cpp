@@ -11,32 +11,6 @@
 #include "renderer/INKRenderer.h"
 #include "system/INKCamera.h"
 
-#define GL_STRINGIFY(s) #s
-
-const GLchar* INKGLProgram::defaultVS =
-"#version 330 core\n"
-GL_STRINGIFY(
-    layout(location = 0) in vec3 vPosition;
-	
-	uniform mat4 uModelMat = mat4(1.);
-	uniform mat4 uViewMat = mat4(1.);
-	uniform mat4 uProjMat = mat4(1.);
-
-    void main() {
-        gl_Position = uProjMat * uViewMat * uModelMat * vec4(vPosition, 1.);
-    }
-);
-
-const GLchar* INKGLProgram::defaultFS = 
-"#version 330 core\n"
-GL_STRINGIFY(
-	out vec4 fragColor;
-
-	void main() {
-		fragColor = vec4(1., 0., 0., 1.);
-	}
-);
-
 INKGLProgram::INKGLProgram()
 	: _program(0)
 	, _modelMatrixLocation(-1)

@@ -43,6 +43,9 @@
     <Filter Include="Fichiers sources\math">
       <UniqueIdentifier>{3cf5a736-cc58-49ff-a86d-4c3aa57baaaf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\renderer\shaders">
+      <UniqueIdentifier>{594ae3af-54b8-4c88-9cf4-22288289461b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -127,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="includes\system\INKCamera.h">
       <Filter>Fichiers d%27en-tête\system</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\vs_default.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\fs_default.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
