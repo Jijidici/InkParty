@@ -22,7 +22,12 @@ INKRenderable::~INKRenderable() {
 void INKRenderable::render() {
 	_pProgram->use();
 	_pProgram->updateUniforms();
-	_pProgram->sendModelUniform(glm::translate(glm::mat4(1.f), glm::vec3(2.f, 2.f, 0.f)));
+
+	glm::mat4 modelMatrix = glm::mat4(1.f);
+	modelMatrix = glm::translate(modelMatrix, _position);
+	modelMatrix = glm::scale(modelMatrix, _scale);
+	modelMatrix = glm::rotate(modelMatrix, _fRotation, glm::vec3(0., 0., 1.));
+	_pProgram->sendModelUniform(modelMatrix);
 
 	_pShape->draw();
 }

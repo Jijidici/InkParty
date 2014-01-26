@@ -5,6 +5,7 @@
 #include "system/INKApp.h"
 
 #include "SDL.h"
+#include "glm.hpp"
 #include "renderer/INKRenderer.h"
 #include "renderer/INKRenderable.h"
 #include "event/INKEventManager.h"
@@ -49,7 +50,12 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	INKRenderer::getInstance()->add(new INKRenderable(INKRenderer::getInstance()->getSquare()));
+	INKRenderable* pTest = new INKRenderable(INKRenderer::getInstance()->getSquare());
+	pTest->setPosition(glm::vec3(-5., 2., 0.));
+	pTest ->setScale(glm::vec3(8.f, 8.f, 1.f));
+	pTest->setRotation(35.);
+
+	INKRenderer::getInstance()->add(pTest);
 	//test zone
 }
 
