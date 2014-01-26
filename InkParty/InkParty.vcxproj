@@ -23,6 +23,7 @@
     <ClCompile Include="src\renderer\INKRenderer.cpp" />
     <ClCompile Include="src\renderer\shapes\INKSquareShape.cpp" />
     <ClCompile Include="src\system\INKApp.cpp" />
+    <ClCompile Include="src\system\INKCamera.cpp" />
     <ClCompile Include="src\system\INKFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +38,7 @@
     <ClInclude Include="includes\renderer\INKRenderer.h" />
     <ClInclude Include="includes\renderer\shapes\INKSquareShape.h" />
     <ClInclude Include="includes\system\INKApp.h" />
+    <ClInclude Include="includes\system\INKCamera.h" />
     <ClInclude Include="includes\system\INKFrame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

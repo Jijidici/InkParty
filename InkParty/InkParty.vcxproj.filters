@@ -84,6 +84,9 @@
     <ClCompile Include="src\math\INKMatrixStack.cpp">
       <Filter>Fichiers sources\math</Filter>
     </ClCompile>
+    <ClCompile Include="src\system\INKCamera.cpp">
+      <Filter>Fichiers sources\system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="includes\math\INKMatrixStack.h">
       <Filter>Fichiers d%27en-tête\math</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\system\INKCamera.h">
+      <Filter>Fichiers d%27en-tête\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
