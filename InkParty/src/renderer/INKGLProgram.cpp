@@ -17,9 +17,13 @@ const GLchar* INKGLProgram::defaultVS =
 "#version 330 core\n"
 GL_STRINGIFY(
     layout(location = 0) in vec3 vPosition;
+	
+	uniform mat4 uModelMat = mat4(1.);
+	uniform mat4 uViewMat = mat4(1.);
+	uniform mat4 uProjMat = mat4(1.);
 
     void main() {
-        gl_Position = vec4(vPosition, 1.);
+        gl_Position = uProjMat * uViewMat * uModelMat * vec4(vPosition, 1.);
     }
 );
 
@@ -140,9 +144,9 @@ void INKGLProgram::buildProgram(const GLchar* vertexShaderSource, const GLchar* 
 		throw std::runtime_error("Error while linking shader program");
     }
 
-	initUniformLocations();
-
 	_program = program;
+
+	initUniformLocations();
 }
 
 void INKGLProgram::use() {

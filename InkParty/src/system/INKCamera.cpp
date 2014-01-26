@@ -9,14 +9,14 @@
 
 INKCamera::INKCamera(float fFrameRatio) {
 	_position = glm::vec3(0.f, 0.f, 1.f);
-	_matrixView = glm::lookAt(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
-	_matrixProj = glm::ortho(-1.f, 1.f, -fFrameRatio, fFrameRatio, 0.01f, -100.f);
+	_matrixView = glm::lookAt(_position, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
+	_matrixProj = glm::ortho(-10.f*fFrameRatio, 10.f*fFrameRatio, -10.f, 10.f);
 }
 
 INKCamera::~INKCamera() {
 
 }
 
-const glm::mat4& INKCamera::getView() {
+const glm::mat4 INKCamera::getView() {
 	return glm::translate(_matrixView, _position);
 }

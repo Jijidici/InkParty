@@ -13,10 +13,10 @@ public:
 	INKCamera(float fFrameRatio);
 	~INKCamera();
 
-	const glm::mat4& getProjection() { return _matrixProj; }
-	const glm::mat4& getView();
+	const glm::mat4 getProjection() { return _matrixProj; }
+	const glm::mat4 getView();
 
-	const glm::vec3& getPosition() { return _position; }
+	const glm::vec3 getPosition() { return _position; }
 	void setPosition(glm::vec3 position) { _position = position; }
 
 protected:
