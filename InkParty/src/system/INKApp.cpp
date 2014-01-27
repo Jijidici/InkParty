@@ -57,16 +57,17 @@ void INKApp::init() {
 	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0., -1., 0.)));
 	INKRenderer::getInstance()->add(_pPartSystem);
 
-	INKCustomShape* pCustom = new INKCustomShape();
-	pCustom->addPoint(glm::vec3(-2.f, -2.f, 0.f));
-	pCustom->addPoint(glm::vec3(5.f, -2.f, 0.f));
-	pCustom->addPoint(glm::vec3(3.f, 6.f, 0.f));
-	pCustom->addPoint(glm::vec3(2.f, 6.f, 0.f));
-	pCustom->addPoint(glm::vec3(-9.f, 0.f, 0.f));
-	pCustom->setBuildType(INKCustomShape::eStrip);
-	pCustom->build();
+	std::vector<glm::vec3> testPoint;
+	testPoint.push_back(glm::vec3(-10.f,	-10.f, 0.f));
+	testPoint.push_back(glm::vec3(-9.f,		-10.f, 0.f));
+	testPoint.push_back(glm::vec3(-10.f,	-12.f, 0.f));
+	testPoint.push_back(glm::vec3(-9.f,		-11.f, 0.f));
+	testPoint.push_back(glm::vec3( 10.f,	-12.f, 0.f));
+	testPoint.push_back(glm::vec3( 9.f,		-11.f, 0.f));
+	testPoint.push_back(glm::vec3( 10.f,	-10.f, 0.f));
+	testPoint.push_back(glm::vec3( 9.f,		-10.f, 0.f));
 	
-	_pRendTest = new INKRenderable(pCustom);
+	_pRendTest = new INKPhysicSolid(testPoint);
 	INKRenderer::getInstance()->add(_pRendTest);
 	//test zone
 }

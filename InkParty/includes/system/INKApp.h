@@ -8,10 +8,10 @@
 #include <vector>
 #include "system/INKFrame.h"
 #include "system/INKCamera.h"
-#include "renderer/INKRenderable.h"
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
 #include "physics/INKParticleSystem.h"
+#include "physics/INKPhysicSolid.h"
 
 class INKApp : public INKEventListener {
 public:
@@ -31,7 +31,7 @@ private:
 
 	INKCamera*			_pCamera;
 	INKParticleSystem*	_pPartSystem;
-	INKRenderable*		_pRendTest;
+	INKPhysicSolid*		_pRendTest;
 };
 
 #endif

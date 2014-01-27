@@ -20,12 +20,12 @@ public:
 
 	virtual void	build();
 	virtual void	draw();
-	void			addPoint(glm::vec3 point) { _points.push_back(point); }
+	void			addPoint(glm::vec3 point) { _vertices.push_back(point); }
 
 	void			setBuildType(EBuildType type) { _buildType = type; }
 
 protected:
-	std::vector<glm::vec3>	_points; 
+	std::vector<glm::vec3>	_vertices; 
 	EBuildType				_buildType;
 };
 

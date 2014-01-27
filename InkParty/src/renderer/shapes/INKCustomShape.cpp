@@ -19,13 +19,13 @@ INKCustomShape::~INKCustomShape(){
 }
 
 void INKCustomShape::build() {
-	_iVerticesCount = _points.size();
+	_iVerticesCount = _vertices.size();
 
 	if(_vbo == 0) {
 		glGenBuffers(1, &_vbo);
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	glBufferData(GL_ARRAY_BUFFER, _iVerticesCount*3*sizeof(GLfloat), &(_points[0]), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, _iVerticesCount*3*sizeof(GLfloat), &(_vertices[0]), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	if(_vao == 0) {
