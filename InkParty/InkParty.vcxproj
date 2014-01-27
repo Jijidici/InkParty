@@ -106,7 +106,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\glm-0.9.4.6\glm;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\glew-1.10.0\include;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\InkParty\includes;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\SDL-1.2.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\tree-2.81\src;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\glm-0.9.4.6\glm;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\glew-1.10.0\include;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\InkParty\includes;C:\Users\Jijidici\Documents\IMAC\Moteur physique\InkParty\external\SDL-1.2.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
