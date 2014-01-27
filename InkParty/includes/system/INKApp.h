@@ -31,6 +31,7 @@ private:
 
 	INKCamera*			_pCamera;
 	INKParticleSystem*	_pPartSystem;
+	INKRenderable*		_pRendTest;
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
 #include "renderer/INKRenderer.h"
+#include "renderer/shapes/INKCustomShape.h"
 
 INKRenderable::INKRenderable(INKShape* pShape)
 	: _position(glm::vec3(0.f))
@@ -18,7 +19,11 @@ INKRenderable::INKRenderable(INKShape* pShape)
 }
 
 INKRenderable::~INKRenderable() {
-
+	INKCustomShape* pCustomShape = dynamic_cast<INKCustomShape*>(_pShape);
+	if(pCustomShape != nullptr) {
+		delete _pShape;
+		_pShape = nullptr;
+	}
 }
 
 void INKRenderable::render() {

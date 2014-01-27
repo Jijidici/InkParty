@@ -7,6 +7,7 @@
 #include "SDL.h"
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
+#include "renderer/shapes/INKCustomShape.h"
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
@@ -55,7 +56,17 @@ void INKApp::init() {
 	_pPartSystem->addRandomParticles(256, 10.);
 	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0., -1., 0.)));
 	INKRenderer::getInstance()->add(_pPartSystem);
+
+	INKCustomShape* pCustom = new INKCustomShape();
+	pCustom->addPoint(glm::vec3(-2.f, -2.f, 0.f));
+	pCustom->addPoint(glm::vec3(5.f, -2.f, 0.f));
+	pCustom->addPoint(glm::vec3(3.f, 6.f, 0.f));
+	pCustom->addPoint(glm::vec3(2.f, 6.f, 0.f));
+	pCustom->addPoint(glm::vec3(-9.f, 0.f, 0.f));
+	pCustom->build();
 	
+	_pRendTest = new INKRenderable(pCustom);
+	INKRenderer::getInstance()->add(_pRendTest);
 	//test zone
 }
 
@@ -82,4 +93,8 @@ void INKApp::quit() {
 		delete _pMainFrame;
 		_pMainFrame = 0;
 	}
+
+	delete _pRendTest;
+	delete _pPartSystem;
+	delete _pCamera;
 }

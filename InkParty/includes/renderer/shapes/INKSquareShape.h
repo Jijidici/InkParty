@@ -5,7 +5,6 @@
 #ifndef __INK_SQUARE_SHAPE_H__
 #define __INK_SQUARE_SHAPE_H__
 
-#include "GL/glew.h"
 #include "renderer/shapes/INKShape.h"
 
 class INKSquareShape : public INKShape {
