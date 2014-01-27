@@ -41,6 +41,14 @@ void INKParticleSystem::addRandomParticles(int iParticleCount, float fAmplitude)
 	}
 }
 
+void INKParticleSystem::update(float fDt) {
+	for(std::vector<INKForce*>::iterator itForce=_forcesToApply.begin(); itForce!=_forcesToApply.end(); ++itForce) {
+		(*itForce)->apply(this);
+	}
+
+	leapFrogSolve(fDt);
+}
+
 void INKParticleSystem::leapFrogSolve(float fDt) {
 	for(std::vector<INKParticle*>::iterator itPart=_particles.begin(); itPart!=_particles.end(); ++itPart) {
 		INKParticle* pCurrentPart = *itPart;

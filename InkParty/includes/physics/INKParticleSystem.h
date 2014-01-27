@@ -16,13 +16,15 @@ public:
 
 	void	addRandomParticles(int iParticleCount, float fAmplitude);
 	void	addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
-	void	leapFrogSolve(float fDt);
+	void	update(float fDt);
 
 	std::vector<INKParticle*>&	getParticles() { return _particles; }
 	int							getParticlesCount() const { return _particles.size(); }
 	INKRenderable*				getRenderableParticle(int iPartID) { return static_cast<INKRenderable*>(_particles[iPartID]); }
 
 protected:
+	void	leapFrogSolve(float fDt);
+
 	std::vector<INKParticle*>	_particles;
 	std::vector<INKForce*>		_forcesToApply;
 };

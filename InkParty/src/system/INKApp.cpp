@@ -11,6 +11,7 @@
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
 #include "physics/INKParticle.h"
+#include "physics/forces/INKConstantForce.h"
 
 INKApp::INKApp() 
 	: _pMainFrame(0)
@@ -52,6 +53,7 @@ void INKApp::init() {
 
 	_pPartSystem = new INKParticleSystem();
 	_pPartSystem->addRandomParticles(256, 10.);
+	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0., -1., 0.)));
 	INKRenderer::getInstance()->add(_pPartSystem);
 	
 	//test zone
@@ -66,6 +68,8 @@ void INKApp::launch() {
 		INKRenderer::getInstance()->render();
 
 		INKEventManager::getInstance()->manageEvent(_pMainFrame);
+
+		_pPartSystem->update(fDt);
 
 		fDt = _pMainFrame->computeFrameTime();
 	}
