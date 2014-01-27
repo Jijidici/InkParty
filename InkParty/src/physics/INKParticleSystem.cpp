@@ -40,3 +40,17 @@ void INKParticleSystem::addRandomParticles(int iParticleCount, float fAmplitude)
 		_particles.push_back(pNewParticle);
 	}
 }
+
+void INKParticleSystem::leapFrogSolve(float fDt) {
+	for(std::vector<INKParticle*>::iterator itPart=_particles.begin(); itPart!=_particles.end(); ++itPart) {
+		INKParticle* pCurrentPart = *itPart;
+
+		glm::vec3 nextVelocity = pCurrentPart->getVelocity() + fDt*(pCurrentPart->getForce()/pCurrentPart->getMass());
+		pCurrentPart->setVelocity(nextVelocity);
+
+		glm::vec3 nextPosition = pCurrentPart->getPosition() + fDt*nextVelocity;
+		pCurrentPart->setPosition(nextPosition);
+
+		pCurrentPart->setForce(glm::vec3(0.f));
+	}
+}
