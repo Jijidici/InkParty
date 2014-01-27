@@ -47,6 +47,19 @@ void INKParticleSystem::addRandomParticles(int iParticleCount, float fAmplitude)
 	}
 }
 
+void INKParticleSystem::addParticles(int iParticleCount, float fMass) {
+	int iWidth = static_cast<int>(sqrt(iParticleCount));
+	int iHeight = iParticleCount/iWidth;
+	float fStep = fMass*1.5f;
+
+	for(int i=0; i<iParticleCount; ++i) {
+		INKParticle* pNewParticle = new INKParticle();
+		pNewParticle->setPosition(glm::vec3(fStep*(i%iWidth - iWidth/2), fStep*(i/iWidth - iHeight/2), 0.f));
+		pNewParticle->setMass(fMass);
+		_particles.push_back(pNewParticle);
+	}
+}
+
 void INKParticleSystem::update(float fDt) {
 	for(std::vector<INKForce*>::iterator itForce=_forcesToApply.begin(); itForce!=_forcesToApply.end(); ++itForce) {
 		(*itForce)->apply(this);
