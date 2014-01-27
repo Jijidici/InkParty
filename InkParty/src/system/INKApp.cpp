@@ -52,11 +52,6 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	_pPartSystem = new INKParticleSystem();
-	_pPartSystem->addRandomParticles(256, 10.);
-	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0., -1., 0.)));
-	INKRenderer::getInstance()->add(_pPartSystem);
-
 	std::vector<glm::vec3> testPoint;
 	testPoint.push_back(glm::vec3(-10.f,	-10.f, 0.f));
 	testPoint.push_back(glm::vec3(-9.f,		-10.f, 0.f));
@@ -66,9 +61,13 @@ void INKApp::init() {
 	testPoint.push_back(glm::vec3( 10.f,	-10.f, 0.f));
 	testPoint.push_back(glm::vec3( 10.f,	-12.f, 0.f));
 	testPoint.push_back(glm::vec3(-10.f,	-12.f, 0.f));
-	
-	_pRendTest = new INKPhysicSolid(testPoint);
-	INKRenderer::getInstance()->add(_pRendTest);
+
+	_pPartSystem = new INKParticleSystem();
+	_pPartSystem->addRandomParticles(20, 5.);
+	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -1.f, 0.f)));
+	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.2f, 0.f, 0.f)));
+	_pPartSystem->addSolid(new INKPhysicSolid(testPoint, 2.f));
+	INKRenderer::getInstance()->add(_pPartSystem);
 	//test zone
 }
 
@@ -96,7 +95,6 @@ void INKApp::quit() {
 		_pMainFrame = 0;
 	}
 
-	delete _pRendTest;
 	delete _pPartSystem;
 	delete _pCamera;
 }

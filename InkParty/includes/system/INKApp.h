@@ -31,7 +31,6 @@ private:
 
 	INKCamera*			_pCamera;
 	INKParticleSystem*	_pPartSystem;
-	INKPhysicSolid*		_pRendTest;
 };
 
 #endif

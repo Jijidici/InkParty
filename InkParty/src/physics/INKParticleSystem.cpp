@@ -24,6 +24,12 @@ INKParticleSystem::~INKParticleSystem() {
 		*itForce = nullptr;
 	}
 	_forcesToApply.clear();
+
+	for(std::vector<INKPhysicSolid*>::iterator itSolid=_solids.begin(); itSolid!=_solids.end(); ++itSolid) {
+		delete *itSolid;
+		*itSolid = nullptr;
+	}
+	_solids.clear();
 }
 
 void INKParticleSystem::addRandomParticles(int iParticleCount, float fAmplitude) {
@@ -46,6 +52,18 @@ void INKParticleSystem::update(float fDt) {
 		(*itForce)->apply(this);
 	}
 
+	if(fDt != 0.f) {
+		for(std::vector<INKParticle*>::iterator itPart=_particles.begin(); itPart!=_particles.end(); ++itPart) {
+			glm::vec3 partNextPos;
+			glm::vec3 partNextVel;
+			getNextState(*itPart, partNextPos, partNextVel, fDt);
+
+			for(std::vector<INKPhysicSolid*>::iterator itSolid=_solids.begin(); itSolid!=_solids.end(); ++itSolid) {
+				(*itSolid)->computeCollision(*itPart, partNextPos, partNextVel, fDt);
+			}
+		}
+	}
+
 	leapFrogSolve(fDt);
 }
 
@@ -61,4 +79,9 @@ void INKParticleSystem::leapFrogSolve(float fDt) {
 
 		pCurrentPart->setForce(glm::vec3(0.f));
 	}
+}
+
+void INKParticleSystem::getNextState(INKParticle* pParticle, glm::vec3& nextPos, glm::vec3& nextVel, float fDt) {
+	nextVel = pParticle->getVelocity() + fDt*(pParticle->getForce()/pParticle->getMass());
+	nextPos = pParticle->getPosition() + fDt*nextVel;
 }
