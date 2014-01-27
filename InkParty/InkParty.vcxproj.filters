@@ -114,6 +114,9 @@
     <ClCompile Include="src\physics\forces\INKConstantForce.cpp">
       <Filter>Fichiers sources\physics\forces</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\shapes\INKShape.cpp">
+      <Filter>Fichiers sources\renderer\shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="includes\physics\forces\INKConstantForce.h">
       <Filter>Fichiers d%27en-tête\physics\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shapes\INKShape.h">
+      <Filter>Fichiers d%27en-tête\renderer\shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

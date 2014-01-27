@@ -9,6 +9,7 @@
 
 #include "renderer/INKRenderable.h"
 #include "renderer/INKGLProgram.h"
+#include "renderer/shapes/INKSquareShape.h"
 #include "system/INKCamera.h"
 #include "physics/INKParticleSystem.h"
 

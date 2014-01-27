@@ -6,21 +6,14 @@
 #define __INK_SQUARE_SHAPE_H__
 
 #include "GL/glew.h"
+#include "renderer/shapes/INKShape.h"
 
-class INKSquareShape {
+class INKSquareShape : public INKShape {
 public:
-	INKSquareShape();
-	~INKSquareShape();
+					INKSquareShape();
+	virtual			~INKSquareShape();
 
-	void draw();
-
-private:
-	void init();
-
-	int			_iVerticesCount;
-	int			_iDim;
-	GLuint		_vbo;
-	GLuint		_vao;
+	virtual void	build();
 };
 
 #endif //__INK_SQUARE_SHAPE_H__

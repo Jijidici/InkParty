@@ -6,12 +6,12 @@
 #define __INK_RENDERABLE_H__
 
 #include "glm.hpp"
-#include "renderer/shapes/INKSquareShape.h"
+#include "renderer/shapes/INKShape.h"
 #include "renderer/INKGLProgram.h"
 
 class INKRenderable {
 public:
-					INKRenderable(INKSquareShape* pShape);
+					INKRenderable(INKShape* pShape);
 	virtual			~INKRenderable();
 
 	void			render();
@@ -29,7 +29,7 @@ protected:
 	glm::vec3		_scale;
 	float			_fRotation;
 
-	INKSquareShape* _pShape;
+	INKShape* _pShape;
 	INKGLProgram*	_pProgram;
 };
 

@@ -25,6 +25,7 @@
     <ClCompile Include="src\renderer\INKGLProgram.cpp" />
     <ClCompile Include="src\renderer\INKRenderable.cpp" />
     <ClCompile Include="src\renderer\INKRenderer.cpp" />
+    <ClCompile Include="src\renderer\shapes\INKShape.cpp" />
     <ClCompile Include="src\renderer\shapes\INKSquareShape.cpp" />
     <ClCompile Include="src\system\INKApp.cpp" />
     <ClCompile Include="src\system\INKCamera.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="includes\renderer\INKRenderer.h" />
     <ClInclude Include="includes\renderer\shaders\fs_default.h" />
     <ClInclude Include="includes\renderer\shaders\vs_default.h" />
+    <ClInclude Include="includes\renderer\shapes\INKShape.h" />
     <ClInclude Include="includes\renderer\shapes\INKSquareShape.h" />
     <ClInclude Include="includes\system\INKApp.h" />
     <ClInclude Include="includes\system\INKCamera.h" />
