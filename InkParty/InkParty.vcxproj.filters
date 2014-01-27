@@ -126,6 +126,9 @@
     <ClCompile Include="src\physics\forces\INKHookForce.cpp">
       <Filter>Fichiers sources\physics\forces</Filter>
     </ClCompile>
+    <ClCompile Include="src\physics\forces\INKBrakeForce.cpp">
+      <Filter>Fichiers sources\physics\forces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -195,6 +198,9 @@
       <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
     <ClInclude Include="includes\physics\forces\INKHookForce.h">
+      <Filter>Fichiers d%27en-tête\physics\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\physics\forces\INKBrakeForce.h">
       <Filter>Fichiers d%27en-tête\physics\forces</Filter>
     </ClInclude>
   </ItemGroup>

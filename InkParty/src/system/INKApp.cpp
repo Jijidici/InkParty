@@ -14,6 +14,7 @@
 #include "physics/INKParticle.h"
 #include "physics/forces/INKConstantForce.h"
 #include "physics/forces/INKHookForce.h"
+#include "physics/forces/INKBrakeForce.h"
 
 INKApp::INKApp() 
 	: _pMainFrame(0)
@@ -66,8 +67,9 @@ void INKApp::init() {
 	_pPartSystem = new INKParticleSystem();
 	_pPartSystem->addRandomParticles(20, 5.);
 	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -1.f, 0.f)));
-	_pPartSystem->addForce(new INKHookForce(0.5f, 0.5f));
-	_pPartSystem->addSolid(new INKPhysicSolid(testPoint, 2.f));
+	_pPartSystem->addForce(new INKHookForce(0.1f, 1.f));
+	_pPartSystem->addForce(new INKBrakeForce(2.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(testPoint, 1.1f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 	//test zone
 }

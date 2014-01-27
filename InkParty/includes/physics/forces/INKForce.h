@@ -13,6 +13,11 @@ public:
 	virtual ~INKForce();
 
 	virtual void apply(INKParticleSystem* pSystem) = 0;
+
+	void		 setDt(float fDt) { _fDt = fDt; }
+
+protected:
+	float _fDt;
 };
 
 #endif // __INK_FORCE_H__
