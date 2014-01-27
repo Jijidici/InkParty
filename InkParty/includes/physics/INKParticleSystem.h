@@ -13,7 +13,7 @@
 class INKParticleSystem {
 public:
 			INKParticleSystem();
-			~INKParticleSystem();
+	virtual	~INKParticleSystem();
 
 	void	addRandomParticles(int iParticleCount, float fAmplitude);
 	void	addParticles(int iParticleCount, float fMass);
