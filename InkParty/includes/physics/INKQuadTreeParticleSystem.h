@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <utility>
+#include <map>
 #include "tree.hh"
 #include "glm.hpp"
 #include "physics/INKParticleSystem.h"
@@ -28,10 +29,15 @@ protected:
 
 		glm::vec2 center;
 		glm::vec2 halfDimension;
-		std::vector<int> particlesIds;
+		std::map<int, glm::vec3> particleInfoMap;
 	};
 
+	void	updateQuadTree();
 	void	updateGraph();
+
+	bool	insertTreeNode(tree<QuadTreeNode>::iterator node, glm::vec3 particlePos, int particleId);
+	bool	contains(const QuadTreeNode& container, glm::vec3 particlePos);
+	void	subdivide(tree<QuadTreeNode>::iterator node);
 
 	tree<QuadTreeNode>	_positionQuadTree;
 	TParticleGraph		_graph;
