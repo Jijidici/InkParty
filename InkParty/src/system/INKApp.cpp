@@ -60,12 +60,12 @@ void INKApp::init() {
 	std::vector<glm::vec3> testPoint;
 	testPoint.push_back(glm::vec3(-10.f,	-10.f, 0.f));
 	testPoint.push_back(glm::vec3(-9.f,		-10.f, 0.f));
-	testPoint.push_back(glm::vec3(-10.f,	-12.f, 0.f));
 	testPoint.push_back(glm::vec3(-9.f,		-11.f, 0.f));
-	testPoint.push_back(glm::vec3( 10.f,	-12.f, 0.f));
 	testPoint.push_back(glm::vec3( 9.f,		-11.f, 0.f));
-	testPoint.push_back(glm::vec3( 10.f,	-10.f, 0.f));
 	testPoint.push_back(glm::vec3( 9.f,		-10.f, 0.f));
+	testPoint.push_back(glm::vec3( 10.f,	-10.f, 0.f));
+	testPoint.push_back(glm::vec3( 10.f,	-12.f, 0.f));
+	testPoint.push_back(glm::vec3(-10.f,	-12.f, 0.f));
 	
 	_pRendTest = new INKPhysicSolid(testPoint);
 	INKRenderer::getInstance()->add(_pRendTest);
