@@ -26,7 +26,7 @@ void INKQuadTreeParticleSystem::updateQuadTree() {
 
 	QuadTreeNode root;
 	root.center = glm::vec2(0.f);
-	root.halfDimension = glm::vec2(10.f);
+	root.halfDimension = glm::vec2(20.f);
 
 	tree<QuadTreeNode>::iterator itHead = _positionQuadTree.insert(_positionQuadTree.begin(), root);
 
@@ -40,11 +40,15 @@ void INKQuadTreeParticleSystem::updateQuadTree() {
 void INKQuadTreeParticleSystem::updateGraph() {
 	_graph.clear();
 	
-	//test
-	for(unsigned int i=0; i<_particles.size()-1; ++i) {
-		_graph.push_back(std::make_pair(i, i+1));
+	for(unsigned int i=0; i<_particles.size(); ++i) {
+		std::vector<int> nearestParticleId = getNearestParticules(++_positionQuadTree.begin(), _particles[i]->getPosition(), 2.f*_particles[i]->getMass());
+
+		for(std::vector<int>::iterator itId=nearestParticleId.begin(); itId!=nearestParticleId.end(); ++itId) {
+			if(i != *itId) {
+				_graph.push_back(std::make_pair(i, *itId));
+			}
+		}
 	}
-	//test
 }
 
 bool INKQuadTreeParticleSystem::insertTreeNode(tree<QuadTreeNode>::iterator node, glm::vec3 particlePos, int particleId) {
@@ -73,6 +77,20 @@ bool INKQuadTreeParticleSystem::insertTreeNode(tree<QuadTreeNode>::iterator node
 bool INKQuadTreeParticleSystem::contains(const QuadTreeNode& container, glm::vec3 particlePos) {
 	if(particlePos.x > container.center.x - container.halfDimension.x && particlePos.x < container.center.x + container.halfDimension.x
 	&& particlePos.y > container.center.y - container.halfDimension.y && particlePos.y < container.center.y + container.halfDimension.y) {
+		return true;
+	}
+	return false;
+}
+
+bool INKQuadTreeParticleSystem::contains(const QuadTreeNode& container, glm::vec3 particlePos, float fRange) {
+	if((particlePos.x-fRange > container.center.x - container.halfDimension.x && particlePos.x-fRange < container.center.x + container.halfDimension.x
+	&& particlePos.y-fRange > container.center.y - container.halfDimension.y && particlePos.y-fRange < container.center.y + container.halfDimension.y) ||
+	(particlePos.x+fRange > container.center.x - container.halfDimension.x && particlePos.x+fRange < container.center.x + container.halfDimension.x
+	&& particlePos.y-fRange > container.center.y - container.halfDimension.y && particlePos.y-fRange < container.center.y + container.halfDimension.y) ||
+	(particlePos.x-fRange > container.center.x - container.halfDimension.x && particlePos.x-fRange < container.center.x + container.halfDimension.x
+	&& particlePos.y+fRange > container.center.y - container.halfDimension.y && particlePos.y+fRange < container.center.y + container.halfDimension.y) ||
+	(particlePos.x+fRange > container.center.x - container.halfDimension.x && particlePos.x+fRange < container.center.x + container.halfDimension.x
+	&& particlePos.y+fRange > container.center.y - container.halfDimension.y && particlePos.y+fRange < container.center.y + container.halfDimension.y)) {
 		return true;
 	}
 
@@ -108,4 +126,31 @@ void INKQuadTreeParticleSystem::subdivide(tree<QuadTreeNode>::iterator node) {
 		}
 	}
 	node->particleInfoMap.clear();
+}
+
+std::vector<int> INKQuadTreeParticleSystem::getNearestParticules(tree<QuadTreeNode>::iterator node, glm::vec3 particlePos, float fRange) {
+	std::vector<int> vecIds;
+
+	if(!contains(*node, particlePos, fRange)) {
+		return vecIds;
+	}
+
+	QuadTreeNode tempAABB;
+	tempAABB.center = glm::vec2(particlePos.x, particlePos.y);
+	tempAABB.halfDimension = glm::vec2(fRange);
+
+	for(std::map<int, glm::vec3>::iterator it=node->particleInfoMap.begin(); it!=node->particleInfoMap.end(); ++it) {
+		if(contains(tempAABB, it->second)) {
+			vecIds.push_back(it->first);
+		}
+	}
+
+	for(tree<QuadTreeNode>::sibling_iterator itChild=_positionQuadTree.begin(node); itChild!=_positionQuadTree.end(node); ++itChild) {
+		std::vector<int> tmpVecIds = getNearestParticules(itChild, particlePos, fRange);
+		for(std::vector<int>::iterator it=tmpVecIds.begin(); it!=tmpVecIds.end(); ++it) {
+			vecIds.push_back(*it);
+		}
+	}
+
+	return vecIds;
 }

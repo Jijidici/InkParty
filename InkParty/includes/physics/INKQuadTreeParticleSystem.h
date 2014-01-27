@@ -35,9 +35,11 @@ protected:
 	void	updateQuadTree();
 	void	updateGraph();
 
-	bool	insertTreeNode(tree<QuadTreeNode>::iterator node, glm::vec3 particlePos, int particleId);
-	bool	contains(const QuadTreeNode& container, glm::vec3 particlePos);
-	void	subdivide(tree<QuadTreeNode>::iterator node);
+	bool				insertTreeNode(tree<QuadTreeNode>::iterator node, glm::vec3 particlePos, int particleId);
+	bool				contains(const QuadTreeNode& container, glm::vec3 particlePos);
+	bool				contains(const QuadTreeNode& container, glm::vec3 particlePos, float fRange);
+	void				subdivide(tree<QuadTreeNode>::iterator node);
+	std::vector<int>	getNearestParticules(tree<QuadTreeNode>::iterator node, glm::vec3 particulePos, float fRange);
 
 	tree<QuadTreeNode>	_positionQuadTree;
 	TParticleGraph		_graph;
