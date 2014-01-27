@@ -18,6 +18,8 @@ public:
 					INKQuadTreeParticleSystem();
 	virtual			~INKQuadTreeParticleSystem();
 
+	virtual void	update(float fDt);
+
 	TParticleGraph&	getGraph() { return _graph; }
 
 protected:
@@ -28,6 +30,8 @@ protected:
 		glm::vec2 halfDimension;
 		std::vector<int> particlesIds;
 	};
+
+	void	updateGraph();
 
 	tree<QuadTreeNode>	_positionQuadTree;
 	TParticleGraph		_graph;

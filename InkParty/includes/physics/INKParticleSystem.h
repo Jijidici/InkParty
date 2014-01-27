@@ -15,11 +15,11 @@ public:
 			INKParticleSystem();
 	virtual	~INKParticleSystem();
 
-	void	addRandomParticles(int iParticleCount, float fAmplitude);
-	void	addParticles(int iParticleCount, float fMass);
-	void	addSolid(INKPhysicSolid* pSolid) { _solids.push_back(pSolid); }
-	void	addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
-	void	update(float fDt);
+	void			addRandomParticles(int iParticleCount, float fAmplitude);
+	void			addParticles(int iParticleCount, float fMass);
+	void			addSolid(INKPhysicSolid* pSolid) { _solids.push_back(pSolid); }
+	void			addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
+	virtual void	update(float fDt);
 
 	std::vector<INKParticle*>&		getParticles() { return _particles; }
 	INKParticle*					getParticle(int id) { return _particles[id]; }

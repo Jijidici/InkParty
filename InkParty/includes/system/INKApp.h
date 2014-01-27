@@ -11,6 +11,7 @@
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
 #include "physics/INKParticleSystem.h"
+#include "physics/INKQuadTreeParticleSystem.h"
 #include "physics/INKPhysicSolid.h"
 
 class INKApp : public INKEventListener {
@@ -30,7 +31,7 @@ private:
 	bool				_bLoop;
 
 	INKCamera*			_pCamera;
-	INKParticleSystem*	_pPartSystem;
+	INKQuadTreeParticleSystem*	_pPartSystem;
 };
 
 #endif

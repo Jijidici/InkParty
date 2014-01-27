@@ -64,11 +64,11 @@ void INKApp::init() {
 	testPoint.push_back(glm::vec3( 10.f,	-12.f, 0.f));
 	testPoint.push_back(glm::vec3(-10.f,	-12.f, 0.f));
 
-	_pPartSystem = new INKParticleSystem();
-	_pPartSystem->addParticles(2, 1.);
+	_pPartSystem = new INKQuadTreeParticleSystem();
+	_pPartSystem->addParticles(5, 1.);
 	//_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -1.f, 0.f)));
-	_pPartSystem->addForce(new INKHookForce(5.f, 2.f));
-	_pPartSystem->addForce(new INKBrakeForce(0.01f));
+	_pPartSystem->addForce(new INKHookForce(3.f, 2.f));
+	//_pPartSystem->addForce(new INKBrakeGraphForce(0.01f));
 	_pPartSystem->addSolid(new INKPhysicSolid(testPoint, 1.1f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 	//test zone
