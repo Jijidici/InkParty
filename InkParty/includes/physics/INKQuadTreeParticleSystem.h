@@ -18,7 +18,7 @@ public:
 					INKQuadTreeParticleSystem();
 	virtual			~INKQuadTreeParticleSystem();
 
-	TParticleGraph	getGraph() { return _graph; }
+	TParticleGraph&	getGraph() { return _graph; }
 
 protected:
 	struct QuadTreeNode {

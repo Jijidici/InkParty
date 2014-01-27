@@ -62,6 +62,7 @@ void INKParticleSystem::addParticles(int iParticleCount, float fMass) {
 
 void INKParticleSystem::update(float fDt) {
 	for(std::vector<INKForce*>::iterator itForce=_forcesToApply.begin(); itForce!=_forcesToApply.end(); ++itForce) {
+		(*itForce)->setDt(fDt);
 		(*itForce)->apply(this);
 	}
 

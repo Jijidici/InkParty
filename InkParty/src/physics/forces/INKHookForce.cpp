@@ -19,9 +19,9 @@ INKHookForce::~INKHookForce() {
 }
 
 void INKHookForce::apply(INKParticleSystem* pSystem) {
-	float fEpsilon = 0.001;
+	float fEpsilon = 0.001f;
 
-	for(std::vector<INKParticle*>::iterator itP1=pSystem->getParticles().begin(); itP1!=pSystem->getParticles().end(); ++itP1) {
+	for(std::vector<INKParticle*>::iterator itP1=pSystem->getParticles().begin(); itP1!=pSystem->getParticles().end()-1; ++itP1) {
 		for(std::vector<INKParticle*>::iterator itP2=itP1+1; itP2!=pSystem->getParticles().end(); ++itP2) {
 			glm::vec3 p1p2 = (*itP2)->getPosition() - (*itP1)->getPosition();
 			float d = sqrt(glm::dot(p1p2, p1p2));

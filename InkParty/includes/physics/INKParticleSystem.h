@@ -22,6 +22,7 @@ public:
 	void	update(float fDt);
 
 	std::vector<INKParticle*>&		getParticles() { return _particles; }
+	INKParticle*					getParticle(int id) { return _particles[id]; }
 	int								getParticlesCount() const { return _particles.size(); }
 	std::vector<INKPhysicSolid*>&	getSolids() { return _solids; }
 	int								getSolidsCount() const { return _solids.size(); }

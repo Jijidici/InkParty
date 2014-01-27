@@ -19,9 +19,11 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\math\INKMatrixStack.cpp" />
     <ClCompile Include="src\physics\forces\INKBrakeForce.cpp" />
+    <ClCompile Include="src\physics\forces\INKBrakeGraphForce.cpp" />
     <ClCompile Include="src\physics\forces\INKConstantForce.cpp" />
     <ClCompile Include="src\physics\forces\INKForce.cpp" />
     <ClCompile Include="src\physics\forces\INKHookForce.cpp" />
+    <ClCompile Include="src\physics\forces\INKHookGraphForce.cpp" />
     <ClCompile Include="src\physics\INKParticle.cpp" />
     <ClCompile Include="src\physics\INKParticleSystem.cpp" />
     <ClCompile Include="src\physics\INKPhysicSolid.cpp" />
@@ -44,9 +46,11 @@
     <ClInclude Include="includes\event\INKQuitEvent.h" />
     <ClInclude Include="includes\math\INKMatrixStack.h" />
     <ClInclude Include="includes\physics\forces\INKBrakeForce.h" />
+    <ClInclude Include="includes\physics\forces\INKBrakeGraphForce.h" />
     <ClInclude Include="includes\physics\forces\INKHookForce.h" />
     <ClInclude Include="includes\physics\forces\INKConstantForce.h" />
     <ClInclude Include="includes\physics\forces\INKForce.h" />
+    <ClInclude Include="includes\physics\forces\INKHookGraphForce.h" />
     <ClInclude Include="includes\physics\INKParticle.h" />
     <ClInclude Include="includes\physics\INKParticleSystem.h" />
     <ClInclude Include="includes\physics\INKPhysicSolid.h" />
