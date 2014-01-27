@@ -52,9 +52,7 @@ void INKApp::init() {
 
 	_pPartSystem = new INKParticleSystem();
 	_pPartSystem->addRandomParticles(256, 10.);
-	for(int i=0; i<_pPartSystem->getParticlesCount(); ++i) {
-		INKRenderer::getInstance()->add(_pPartSystem->getRenderableParticle(i));
-	}
+	INKRenderer::getInstance()->add(_pPartSystem);
 	
 	//test zone
 }

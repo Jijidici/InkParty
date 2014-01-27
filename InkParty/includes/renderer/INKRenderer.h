@@ -10,6 +10,7 @@
 #include "renderer/INKRenderable.h"
 #include "renderer/INKGLProgram.h"
 #include "system/INKCamera.h"
+#include "physics/INKParticleSystem.h"
 
 class INKRenderer {
 public:
@@ -17,7 +18,7 @@ public:
 	
 	void			render();
 	void			add(INKRenderable* aRenderable);
-	void			add(std::vector<INKRenderable*> renderables);
+	void			add(INKParticleSystem* pSystem);
 
 	INKSquareShape*	getSquare();
 	INKGLProgram*	getDefaultShaderProgram();

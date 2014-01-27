@@ -10,6 +10,7 @@
 
 #include "renderer/shaders/vs_default.h"
 #include "renderer/shaders/fs_default.h"
+#include "physics/INKParticle.h"
 
 static INKRenderer* _pInstance = nullptr;
 
@@ -62,8 +63,8 @@ void INKRenderer::add(INKRenderable* aRenderable) {
 	_toRender.push_back(aRenderable);
 }
 
-void INKRenderer::add(std::vector<INKRenderable*> renderables) {
-	for(std::vector<INKRenderable*>::iterator it=renderables.begin(); it!=renderables.end(); ++it) {
+void INKRenderer::add(INKParticleSystem* pSystem) {
+	for(std::vector<INKParticle*>::iterator it=pSystem->getParticles().begin(); it!=pSystem->getParticles().end(); ++it) {
 		add(*it);
 	}
 }
