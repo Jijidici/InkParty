@@ -54,22 +54,46 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	std::vector<glm::vec3> testPoint;
-	testPoint.push_back(glm::vec3(-10.f,	-8.f, 0.f));
-	testPoint.push_back(glm::vec3(-9.f,		-8.f, 0.f));
-	testPoint.push_back(glm::vec3(-9.f,		-11.f, 0.f));
-	testPoint.push_back(glm::vec3( 9.f,		-11.f, 0.f));
-	testPoint.push_back(glm::vec3( 9.f,		-8.f, 0.f));
-	testPoint.push_back(glm::vec3( 10.f,	-8.f, 0.f));
-	testPoint.push_back(glm::vec3( 10.f,	-12.f, 0.f));
-	testPoint.push_back(glm::vec3(-10.f,	-12.f, 0.f));
+	std::vector<glm::vec3> quad1;
+	quad1.push_back(glm::vec3(-10.f,	-12.f, 0.f));
+	quad1.push_back(glm::vec3( 10.f,	-12.f, 0.f));
+	quad1.push_back(glm::vec3( 10.f,	-13.f, 0.f));
+	quad1.push_back(glm::vec3(-10.f,	-13.f, 0.f));
+
+	std::vector<glm::vec3> quad2;
+	quad2.push_back(glm::vec3(-10.f, -4.f, 0.f));
+	quad2.push_back(glm::vec3(-2.f, -14.f, 0.f));
+	quad2.push_back(glm::vec3(-3.5f, -14.f, 0.f));
+	quad2.push_back(glm::vec3(-10.f, -5.5f, 0.f));
+
+	std::vector<glm::vec3> quad3;
+	quad3.push_back(glm::vec3(2.f, -14.f, 0.f));
+	quad3.push_back(glm::vec3(10.f, -4.f, 0.f));
+	quad3.push_back(glm::vec3(10.f, -5.5f, 0.f));
+	quad3.push_back(glm::vec3(3.5f, -14.f, 0.f));
+
+	std::vector<glm::vec3> quad4;
+	quad4.push_back(glm::vec3(-10.f,	5.f, 0.f));
+	quad4.push_back(glm::vec3( 1.f,		3.f, 0.f));
+	quad4.push_back(glm::vec3( 1.f,		2.f, 0.f));
+	quad4.push_back(glm::vec3(-10.f,	4.f, 0.f));
+
+	std::vector<glm::vec3> quad5;
+	quad5.push_back(glm::vec3( -1.f,	-3.f, 0.f));
+	quad5.push_back(glm::vec3( 10.f,	2.f, 0.f));
+	quad5.push_back(glm::vec3( 10.f,	1.f, 0.f));
+	quad5.push_back(glm::vec3( -1.f,	-4.f, 0.f));
 
 	_pPartSystem = new INKQuadTreeParticleSystem();
-	_pPartSystem->addParticles(5, 0.5f);
-	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -3.f, 0.f)));
-	_pPartSystem->addForce(new INKHookForce(5.f, 0.5f));
-	_pPartSystem->addForce(new INKBrakeForce(0.05f));
-	_pPartSystem->addSolid(new INKPhysicSolid(testPoint, 1.5f));
+	_pPartSystem->addParticles(81, 0.3f);
+	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -2.f, 0.f)));
+	_pPartSystem->addForce(new INKHookForce(2.f, 0.6f));
+	_pPartSystem->addForce(new INKBrakeForce(0.001f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad1, 1.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad2, 1.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad3, 1.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad4, 1.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad5, 1.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 	//test zone
 }

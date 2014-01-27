@@ -15,7 +15,7 @@ INKQuadTreeParticleSystem::~INKQuadTreeParticleSystem() {
 }
 
 void INKQuadTreeParticleSystem::update(float fDt) {
-	updateQuadTree();
+	//updateQuadTree();
 	updateGraph();
 
 	INKParticleSystem::update(fDt);
@@ -26,13 +26,13 @@ void INKQuadTreeParticleSystem::updateQuadTree() {
 
 	QuadTreeNode root;
 	root.center = glm::vec2(0.f);
-	root.halfDimension = glm::vec2(20.f);
+	root.halfDimension = glm::vec2(100.f);
 
 	tree<QuadTreeNode>::iterator itHead = _positionQuadTree.insert(_positionQuadTree.begin(), root);
 
 	for(unsigned int i=0; i<_particles.size(); ++i) {
 		if(!insertTreeNode(itHead, _particles[i]->getPosition(), i)) {
-			throw std::runtime_error("Quadtree sorting : a particle is outside of the space");
+			//throw std::runtime_error("Quadtree sorting : a particle is outside of the space");
 		}
 	}
 }
@@ -41,13 +41,20 @@ void INKQuadTreeParticleSystem::updateGraph() {
 	_graph.clear();
 	
 	for(unsigned int i=0; i<_particles.size(); ++i) {
-		std::vector<int> nearestParticleId = getNearestParticules(++_positionQuadTree.begin(), _particles[i]->getPosition(), 2.f*_particles[i]->getMass());
+		for(unsigned int j=i+1; j<_particles.size(); ++j) {
+			float d = glm::distance(_particles[i]->getPosition(), _particles[j]->getPosition());
+			if(d < 1.f*_particles[i]->getMass()) {
+				_graph.push_back(std::make_pair(i, j));
+			}
+		}
+
+		/*std::vector<int> nearestParticleId = getNearestParticules(++_positionQuadTree.begin(), _particles[i]->getPosition(), 2.f*_particles[i]->getMass());
 
 		for(std::vector<int>::iterator itId=nearestParticleId.begin(); itId!=nearestParticleId.end(); ++itId) {
 			if(i != *itId) {
 				_graph.push_back(std::make_pair(i, *itId));
 			}
-		}
+		}*/
 	}
 }
 
