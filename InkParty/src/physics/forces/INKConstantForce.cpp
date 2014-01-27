@@ -4,6 +4,8 @@
 
 #include "physics/forces/INKConstantForce.h"
 
+#include "physics/INKParticleSystem.h"
+
 INKConstantForce::INKConstantForce(glm::vec3 initialForce)
 	: _force(initialForce) {
 

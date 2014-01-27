@@ -9,12 +9,10 @@
 #include "physics/forces/INKForce.h"
 #include "physics/INKParticleSystem.h"
 
-class INKParticleSystem;
-
 class INKConstantForce : public INKForce {
 public:
 					INKConstantForce(glm::vec3 initialForce);
-					~INKConstantForce();
+	virtual			~INKConstantForce();
 
 	virtual void	apply(INKParticleSystem* pSystem);
 
