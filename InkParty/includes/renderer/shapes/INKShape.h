@@ -13,7 +13,7 @@ public:
 	virtual			~INKShape();
 
 	virtual void	build() = 0;
-	void			draw();
+	virtual void	draw();
 
 protected:
 	int		_iVerticesCount;

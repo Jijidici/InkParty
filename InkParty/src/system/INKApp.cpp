@@ -63,6 +63,7 @@ void INKApp::init() {
 	pCustom->addPoint(glm::vec3(3.f, 6.f, 0.f));
 	pCustom->addPoint(glm::vec3(2.f, 6.f, 0.f));
 	pCustom->addPoint(glm::vec3(-9.f, 0.f, 0.f));
+	pCustom->setBuildType(INKCustomShape::eStrip);
 	pCustom->build();
 	
 	_pRendTest = new INKRenderable(pCustom);
