@@ -14,13 +14,14 @@ public:
 
 	virtual void	update(float fDt);
 
-	void	setSpringRigidity(float fRigidity) { _fSpringRigidity = fRigidity; }
+	void	setSpringRigidity(float fRepulsiveRigidity, float fAttractiveRigidity) { _fRepulsiveSpringRigidity = fRepulsiveRigidity; _fAttractiveSpringRigidity = fAttractiveRigidity; }
 	void	setSpringLengths(float fRepulsiveLength, float fAttractiveLength) { _fRepulsiveSpringLength = fRepulsiveLength; _fAttractiveSpringLength = fAttractiveLength; }
 	void	setBrakeCoef(float fCoef) { _fBrakeCoef = fCoef; }
 	void	setInfluenceDelta(float fDelta) { _fInfluenceDelta = fDelta; }
 
 protected:
-	float	_fSpringRigidity;
+	float	_fRepulsiveSpringRigidity;
+	float	_fAttractiveSpringRigidity;
 	float	_fRepulsiveSpringLength;
 	float	_fAttractiveSpringLength;
 	float	_fBrakeCoef;

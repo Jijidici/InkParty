@@ -24,8 +24,13 @@ void INKFluidParticleSystem::update(float fDt) {
 
 				float d = glm::length(pP2->getPosition() - pP1->getPosition());
 				//repulsion
-				if(d < (pP1->getMass() + pP2->getMass())) {
-					INKDynamicSpringForce::getInstance()->apply(pP1, pP2, _fSpringRigidity, _fRepulsiveSpringLength, _fBrakeCoef, fDt);
+				if(d < (pP1->getMass() + pP2->getMass())*0.5f) {
+					INKDynamicSpringForce::getInstance()->apply(pP1, pP2, _fRepulsiveSpringRigidity, _fRepulsiveSpringLength, _fBrakeCoef, fDt);
+				}
+
+				//attraction
+				else if(d < (pP1->getMass() + pP2->getMass())*0.5f + 2.f*_fInfluenceDelta) {
+					INKDynamicSpringForce::getInstance()->apply(pP1, pP2, _fAttractiveSpringRigidity, _fAttractiveSpringLength, _fBrakeCoef, fDt);
 				}
 			}
 		}
