@@ -6,8 +6,14 @@
 
 #include "physics/forces/INKDynamicSpringForce.h"
 
-INKFluidParticleSystem::INKFluidParticleSystem() {
+INKFluidParticleSystem::INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, int iCellSize) 
+	: _iSpaceW(iSpaceWidth)
+	, _iSpaceH(iSpaceHeight) 
+	, _iCellSize(iCellSize)
+	, _iCellInWidthCount(_iSpaceW/_iCellSize)
+	, _iCellInHeightCount(_iSpaceH/_iCellSize){
 
+		_grid.resize(_iCellInWidthCount*_iCellInHeightCount);
 }
 
 INKFluidParticleSystem::~INKFluidParticleSystem() {

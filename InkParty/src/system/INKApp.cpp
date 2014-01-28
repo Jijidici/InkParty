@@ -98,7 +98,7 @@ void INKApp::init() {
 	quad7.push_back(glm::vec3(  10.f,	1.f, 0.f));
 	quad7.push_back(glm::vec3(  9.f,	1.f, 0.f));
 
-	_pPartSystem = new INKFluidParticleSystem();
+	_pPartSystem = new INKFluidParticleSystem(20, static_cast<int>(20.f*_pMainFrame->getRatio()), 1);
 	_pPartSystem->setSpringRigidity(5.f, 1.f);
 	_pPartSystem->setSpringLengths(1.f, 0.5f);
 	_pPartSystem->setBrakeCoef(0.0001f);

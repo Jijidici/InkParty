@@ -5,11 +5,12 @@
 #ifndef __INK_FLUID_PARTICLE_SYSTEM_H__
 #define __INK_FLUID_PARTICLE_SYSTEM_H__
 
+#include <vector>
 #include "physics/INKParticleSystem.h"
 
 class INKFluidParticleSystem : public INKParticleSystem {
 public:
-	INKFluidParticleSystem();
+	INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, int iCellSize);
 	~INKFluidParticleSystem();
 
 	virtual void	update(float fDt);
@@ -26,6 +27,13 @@ protected:
 	float	_fAttractiveSpringLength;
 	float	_fBrakeCoef;
 	float	_fInfluenceDelta;
+
+	int		_iSpaceW;
+	int		_iSpaceH;
+	int		_iCellSize;
+	int		_iCellInWidthCount;
+	int		_iCellInHeightCount;
+	std::vector<std::vector<int>> _grid;
 };
 
 #endif //__INK_FLUID_PARTICLE_SYSTEM_H__
