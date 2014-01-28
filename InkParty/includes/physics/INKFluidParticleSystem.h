@@ -21,6 +21,8 @@ public:
 	void	setInfluenceDelta(float fDelta) { _fInfluenceDelta = fDelta; }
 
 protected:
+	void	updateGrid();
+
 	float	_fRepulsiveSpringRigidity;
 	float	_fAttractiveSpringRigidity;
 	float	_fRepulsiveSpringLength;
