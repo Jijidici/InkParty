@@ -53,9 +53,14 @@ void INKRenderer::init() {
 void INKRenderer::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	for(std::vector<INKRenderable*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
 		(*itRend)->render();
 	}
+
+	glDisable(GL_BLEND);
 
 	SDL_GL_SwapBuffers();
 }
@@ -65,11 +70,11 @@ void INKRenderer::add(INKRenderable* aRenderable) {
 }
 
 void INKRenderer::add(INKParticleSystem* pSystem) {
-	for(std::vector<INKParticle*>::iterator it=pSystem->getParticles().begin(); it!=pSystem->getParticles().end(); ++it) {
+	for(std::vector<INKPhysicSolid*>::iterator it=pSystem->getSolids().begin(); it!=pSystem->getSolids().end(); ++it) {
 		add(*it);
 	}
-
-	for(std::vector<INKPhysicSolid*>::iterator it=pSystem->getSolids().begin(); it!=pSystem->getSolids().end(); ++it) {
+	
+	for(std::vector<INKParticle*>::iterator it=pSystem->getParticles().begin(); it!=pSystem->getParticles().end(); ++it) {
 		add(*it);
 	}
 }

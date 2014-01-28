@@ -8,6 +8,8 @@
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
 #include "renderer/shapes/INKCustomShape.h"
+#include "renderer/shaders/vs_particle.h"
+#include "renderer/shaders/fs_particle.h"
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
@@ -85,9 +87,9 @@ void INKApp::init() {
 	quad5.push_back(glm::vec3( -1.f,	-4.f, 0.f));
 
 	_pPartSystem = new INKQuadTreeParticleSystem();
-	_pPartSystem->addParticles(81, 0.3f);
+	_pPartSystem->addParticles(128, 0.3f);
 	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -2.f, 0.f)));
-	_pPartSystem->addForce(new INKHookForce(2.f, 0.6f));
+	_pPartSystem->addForce(new INKHookForce(3.f, 0.3f));
 	_pPartSystem->addForce(new INKBrakeForce(0.001f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad1, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad2, 1.f));
@@ -95,6 +97,12 @@ void INKApp::init() {
 	_pPartSystem->addSolid(new INKPhysicSolid(quad4, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad5, 1.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
+
+	_pParticleProgram = new INKGLProgram();
+	_pParticleProgram->buildProgram(inkshaders::vs_particle, inkshaders::fs_particle);
+	for(int i=0; i<_pPartSystem->getParticlesCount(); ++i) {
+		_pPartSystem->getParticle(i)->setProgram(_pParticleProgram);
+	}
 	//test zone
 }
 
@@ -124,4 +132,5 @@ void INKApp::quit() {
 
 	delete _pPartSystem;
 	delete _pCamera;
+	delete _pParticleProgram;
 }

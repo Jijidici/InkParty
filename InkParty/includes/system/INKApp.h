@@ -8,6 +8,7 @@
 #include <vector>
 #include "system/INKFrame.h"
 #include "system/INKCamera.h"
+#include "renderer/INKGLProgram.h"
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
 #include "physics/INKParticleSystem.h"
@@ -30,6 +31,7 @@ private:
 	INKFrame*			_pMainFrame;
 	bool				_bLoop;
 
+	INKGLProgram*		_pParticleProgram;
 	INKCamera*			_pCamera;
 	INKQuadTreeParticleSystem*	_pPartSystem;
 };

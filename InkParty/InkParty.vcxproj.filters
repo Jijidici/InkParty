@@ -209,5 +209,11 @@
     <ClInclude Include="includes\physics\INKQuadTreeParticleSystem.h">
       <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\fs_particle.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\vs_particle.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

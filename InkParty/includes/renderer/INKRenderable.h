@@ -14,7 +14,7 @@ public:
 					INKRenderable(INKShape* pShape);
 	virtual			~INKRenderable();
 
-	void			render();
+	virtual void	render();
 
 	const glm::vec3	getPosition() const { return _position; }
 	const glm::vec3	getScale() const { return _scale; }
@@ -23,6 +23,7 @@ public:
 	void			setPosition(glm::vec3 position) { _position = position; }
 	void			setScale(glm::vec3 scale) { _scale = scale; }
 	void			setRotation(float fRotation) { _fRotation = fRotation; }
+	void			setProgram(INKGLProgram* pProgram) { _pProgram = pProgram; }
 
 protected:
 	glm::vec3		_position;

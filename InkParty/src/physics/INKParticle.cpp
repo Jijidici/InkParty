@@ -4,6 +4,8 @@
 
 #include "physics/INKParticle.h"
 
+#include "GL/glew.h"
+#include "gtc/type_ptr.hpp"
 #include "renderer/INKRenderer.h"
 
 INKParticle::INKParticle()
@@ -11,7 +13,6 @@ INKParticle::INKParticle()
 	, _velocity(0.f)
 	, _force(0.f)
 	, _fMass(1.f) {
-
 }
 
 INKParticle::~INKParticle() {

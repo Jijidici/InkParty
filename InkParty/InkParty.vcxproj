@@ -55,7 +55,9 @@
     <ClInclude Include="includes\renderer\INKRenderable.h" />
     <ClInclude Include="includes\renderer\INKRenderer.h" />
     <ClInclude Include="includes\renderer\shaders\fs_default.h" />
+    <ClInclude Include="includes\renderer\shaders\fs_particle.h" />
     <ClInclude Include="includes\renderer\shaders\vs_default.h" />
+    <ClInclude Include="includes\renderer\shaders\vs_particle.h" />
     <ClInclude Include="includes\renderer\shapes\INKCustomShape.h" />
     <ClInclude Include="includes\renderer\shapes\INKShape.h" />
     <ClInclude Include="includes\renderer\shapes\INKSquareShape.h" />

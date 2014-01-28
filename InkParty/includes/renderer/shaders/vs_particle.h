@@ -1,9 +1,9 @@
 /* ***********************************************************************
-	vs_default.h - @Jijidici - 14/01/2014
+	vs_particle.h - @Jijidici - 14/01/2014
 ************************************************************************ */
 
-#ifndef __VS_DEFAULT_H__
-#define __VS_DEFAULT_H__
+#ifndef __VS_PARTICLE_H__
+#define __VS_PARTICLE_H__
 
 #ifndef GL_STRINGIFY
 #define GL_STRINGIFY(s) #s
@@ -13,7 +13,7 @@
 
 namespace inkshaders {
 
-const GLchar* vs_default =
+const GLchar* vs_particle =
 "#version 330 core\n"
 GL_STRINGIFY(
 	////BEGIN////
@@ -24,8 +24,11 @@ GL_STRINGIFY(
 	uniform mat4 uViewMat = mat4(1.);
 	uniform mat4 uProjMat = mat4(1.);
 
+	out vec3 fPosition;
+
     void main() {
         gl_Position = uProjMat * uViewMat * uModelMat * vec4(vPosition, 1.);
+		fPosition = vPosition;
     }
 
 	///END///
@@ -33,4 +36,4 @@ GL_STRINGIFY(
 
 }
 
-#endif //__VS_DEFAULT_H__
+#endif //__VS_PARTICLE_H__

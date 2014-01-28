@@ -43,7 +43,7 @@ void INKQuadTreeParticleSystem::updateGraph() {
 	for(unsigned int i=0; i<_particles.size(); ++i) {
 		for(unsigned int j=i+1; j<_particles.size(); ++j) {
 			float d = glm::distance(_particles[i]->getPosition(), _particles[j]->getPosition());
-			if(d < 1.f*_particles[i]->getMass()) {
+			if(d < 2.f*_particles[i]->getMass()) {
 				_graph.push_back(std::make_pair(i, j));
 			}
 		}
