@@ -47,7 +47,7 @@ void INKRenderer::init() {
 		throw std::runtime_error("Unable to initialize GLEW");
 	}
 	
-	glClearColor(0.1f, 0.2f, 0.3f, 1.f);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 }
 
 void INKRenderer::render() {

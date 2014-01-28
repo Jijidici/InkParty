@@ -25,10 +25,12 @@ GL_STRINGIFY(
 	uniform mat4 uProjMat = mat4(1.);
 
 	out vec3 fPosition;
+	out vec3 fAbsolutePosition;
 
     void main() {
         gl_Position = uProjMat * uViewMat * uModelMat * vec4(vPosition, 1.);
 		fPosition = vPosition;
+		fAbsolutePosition = (uModelMat * vec4(vPosition, 1.)).xyz;
     }
 
 	///END///

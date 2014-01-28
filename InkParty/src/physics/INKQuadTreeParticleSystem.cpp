@@ -39,15 +39,17 @@ void INKQuadTreeParticleSystem::updateQuadTree() {
 
 void INKQuadTreeParticleSystem::updateGraph() {
 	_graph.clear();
-	
+	float threshold = pow(0.2f*_particles[0]->getMass(), 2);
+
 	for(unsigned int i=0; i<_particles.size(); ++i) {
 		for(unsigned int j=i+1; j<_particles.size(); ++j) {
-			float d = glm::distance(_particles[i]->getPosition(), _particles[j]->getPosition());
-			if(d < 2.f*_particles[i]->getMass()) {
+			glm::vec3 p1p2 = _particles[i]->getPosition() - _particles[j]->getPosition();
+			if(glm::dot(p1p2, p1p2) < threshold) {
 				_graph.push_back(std::make_pair(i, j));
 			}
 		}
 
+		
 		/*std::vector<int> nearestParticleId = getNearestParticules(++_positionQuadTree.begin(), _particles[i]->getPosition(), 2.f*_particles[i]->getMass());
 
 		for(std::vector<int>::iterator itId=nearestParticleId.begin(); itId!=nearestParticleId.end(); ++itId) {

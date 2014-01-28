@@ -70,9 +70,9 @@ void INKApp::init() {
 
 	std::vector<glm::vec3> quad3;
 	quad3.push_back(glm::vec3(2.f, -14.f, 0.f));
-	quad3.push_back(glm::vec3(10.f, -4.f, 0.f));
-	quad3.push_back(glm::vec3(10.f, -5.5f, 0.f));
-	quad3.push_back(glm::vec3(3.5f, -14.f, 0.f));
+	quad3.push_back(glm::vec3(3.5f, -4.f, 0.f));
+	quad3.push_back(glm::vec3(4.5f, -4.f, 0.f));
+	quad3.push_back(glm::vec3(3.f, -14.f, 0.f));
 
 	std::vector<glm::vec3> quad4;
 	quad4.push_back(glm::vec3(-10.f,	5.f, 0.f));
@@ -86,16 +86,30 @@ void INKApp::init() {
 	quad5.push_back(glm::vec3( 10.f,	1.f, 0.f));
 	quad5.push_back(glm::vec3( -1.f,	-4.f, 0.f));
 
+	std::vector<glm::vec3> quad6;
+	quad6.push_back(glm::vec3(-10.f,	12.f, 0.f));
+	quad6.push_back(glm::vec3( -9.f,	12.f, 0.f));
+	quad6.push_back(glm::vec3( -9.f,	3.f, 0.f));
+	quad6.push_back(glm::vec3( -10.f,	3.f, 0.f));
+
+	std::vector<glm::vec3> quad7;
+	quad7.push_back(glm::vec3(  9.f,	12.f, 0.f));
+	quad7.push_back(glm::vec3( 10.f,	12.f, 0.f));
+	quad7.push_back(glm::vec3(  10.f,	1.f, 0.f));
+	quad7.push_back(glm::vec3(  9.f,	1.f, 0.f));
+
 	_pPartSystem = new INKQuadTreeParticleSystem();
-	_pPartSystem->addParticles(128, 0.3f);
+	_pPartSystem->addParticles(256, 0.3f);
 	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -2.f, 0.f)));
-	_pPartSystem->addForce(new INKHookForce(3.f, 0.3f));
-	_pPartSystem->addForce(new INKBrakeForce(0.001f));
+	_pPartSystem->addForce(new INKHookForce(5.f, 0.6f));
+	_pPartSystem->addForce(new INKBrakeForce(0.0002f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad1, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad2, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad3, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad4, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad5, 1.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad6, 1.f));
+	_pPartSystem->addSolid(new INKPhysicSolid(quad7, 1.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 
 	_pParticleProgram = new INKGLProgram();

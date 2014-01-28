@@ -19,6 +19,7 @@ GL_STRINGIFY(
 	////BEGIN////
 
 	in vec3 fPosition;
+	out vec3 fAbsolutePosition;
 
 	out vec4 fragColor;
 
@@ -29,7 +30,8 @@ GL_STRINGIFY(
 			alpha = 1.f;
 		}
 
-		fragColor = vec4(0., 0.5-0.5*(0.5-d), 1.-0.5*(0.5-d), alpha);
+		float colorCoef = (fAbsolutePosition.y + 10.)/20.;
+		fragColor = vec4(1., 0.5, 0., alpha);
 	}
 
 	////END////
