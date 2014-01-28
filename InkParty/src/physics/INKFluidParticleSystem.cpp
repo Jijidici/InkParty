@@ -4,10 +4,32 @@
 
 #include "physics/INKFluidParticleSystem.h"
 
+#include "physics/forces/INKDynamicSpringForce.h"
+
 INKFluidParticleSystem::INKFluidParticleSystem() {
 
 }
 
 INKFluidParticleSystem::~INKFluidParticleSystem() {
 
+}
+
+void INKFluidParticleSystem::update(float fDt) {
+
+	for(unsigned int i=0; i<_particles.size(); ++i) {
+		INKParticle* pP1 = _particles[i];
+		for(unsigned int j=0; j<_particles.size(); ++j) {
+			if(i!=j) {
+				INKParticle* pP2 = _particles[j];
+
+				float d = glm::length(pP2->getPosition() - pP1->getPosition());
+				//repulsion
+				if(d < (pP1->getMass() + pP2->getMass())) {
+					INKDynamicSpringForce::getInstance()->apply(pP1, pP2, _fSpringRigidity, _fRepulsiveSpringLength, _fBrakeCoef, fDt);
+				}
+			}
+		}
+	}
+
+	INKParticleSystem::update(fDt);
 }

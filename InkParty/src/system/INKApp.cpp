@@ -99,10 +99,12 @@ void INKApp::init() {
 	quad7.push_back(glm::vec3(  9.f,	1.f, 0.f));
 
 	_pPartSystem = new INKFluidParticleSystem();
-	_pPartSystem->addParticles(5, 0.3f);
+	_pPartSystem->setSpringRigidity(1.f);
+	_pPartSystem->setSpringLengths(0.6f, 0.3f);
+	_pPartSystem->setBrakeCoef(0.001f);
+	_pPartSystem->setInfluenceDelta(0.1f);
+	_pPartSystem->addParticles(128, 0.3f);
 	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -2.f, 0.f)));
-	_pPartSystem->addForce(new INKHookForce(5.f, 0.6f));
-	_pPartSystem->addForce(new INKBrakeForce(0.002f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad1, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad2, 1.f));
 	_pPartSystem->addSolid(new INKPhysicSolid(quad3, 1.f));
