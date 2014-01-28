@@ -22,6 +22,7 @@
     <ClCompile Include="src\physics\forces\INKConstantForce.cpp" />
     <ClCompile Include="src\physics\forces\INKForce.cpp" />
     <ClCompile Include="src\physics\forces\INKHookForce.cpp" />
+    <ClCompile Include="src\physics\INKFluidParticleSystem.cpp" />
     <ClCompile Include="src\physics\INKParticle.cpp" />
     <ClCompile Include="src\physics\INKParticleSystem.cpp" />
     <ClCompile Include="src\physics\INKPhysicSolid.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="includes\physics\forces\INKHookForce.h" />
     <ClInclude Include="includes\physics\forces\INKConstantForce.h" />
     <ClInclude Include="includes\physics\forces\INKForce.h" />
+    <ClInclude Include="includes\physics\INKFluidParticleSystem.h" />
     <ClInclude Include="includes\physics\INKParticle.h" />
     <ClInclude Include="includes\physics\INKParticleSystem.h" />
     <ClInclude Include="includes\physics\INKPhysicSolid.h" />
