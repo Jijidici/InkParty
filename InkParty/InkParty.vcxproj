@@ -18,6 +18,7 @@
     <ClCompile Include="src\event\INKQuitEvent.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\math\INKMatrixStack.cpp" />
+    <ClCompile Include="src\physics\forces\INKAttractiveForce.cpp" />
     <ClCompile Include="src\physics\forces\INKConstantForce.cpp" />
     <ClCompile Include="src\physics\forces\INKDynamicSpringForce.cpp" />
     <ClCompile Include="src\physics\forces\INKForce.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="includes\event\INKKeyEvent.h" />
     <ClInclude Include="includes\event\INKQuitEvent.h" />
     <ClInclude Include="includes\math\INKMatrixStack.h" />
+    <ClInclude Include="includes\physics\forces\INKAttractiveForce.h" />
     <ClInclude Include="includes\physics\forces\INKDynamicSpringForce.h" />
     <ClInclude Include="includes\physics\forces\INKConstantForce.h" />
     <ClInclude Include="includes\physics\forces\INKForce.h" />

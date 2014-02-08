@@ -12,9 +12,7 @@
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
 #include "physics/INKParticle.h"
-#include "physics/forces/INKConstantForce.h"
-#include "physics/forces/INKHookForce.h"
-#include "physics/forces/INKBrakeForce.h"
+#include "physics/forces/INKAttractiveForce.h"
 
 INKApp::INKApp() 
 	: _pMainFrame(0)
@@ -54,13 +52,13 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	_pPartSystem = new INKFluidParticleSystem(20, static_cast<int>(20.f*_pMainFrame->getRatio()), 0.5f);
-	_pPartSystem->setSpringRigidity(5.f, 2.f);
+	_pPartSystem = new INKFluidParticleSystem(20, static_cast<int>(20.f*_pMainFrame->getRatio()), 5.f);
+	_pPartSystem->setSpringRigidity(2.f, 2.f);
 	_pPartSystem->setSpringLengths(0.6f, 0.3f);
-	_pPartSystem->setBrakeCoef(0.000001f);
+	_pPartSystem->setBrakeCoef(0.0001f);
 	_pPartSystem->setInfluenceDelta(0.2f);
-	_pPartSystem->addParticles(256, 0.3f);
-	_pPartSystem->addForce(new INKConstantForce(glm::vec3(0.f, -3.f, 0.f)));
+	_pPartSystem->addParticles(128, 0.3f);
+	_pPartSystem->addForce(new INKAttractiveForce(glm::vec3(0.f), 1.f, 5.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 
 	//test zone
