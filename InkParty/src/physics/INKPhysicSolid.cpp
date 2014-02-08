@@ -7,31 +7,31 @@
 #include "renderer/shapes/INKCustomShape.h"
 
 INKPhysicSolid::INKPhysicSolid(std::vector<glm::vec3>& vertices, float elasticity)
-	: INKRenderable(new INKCustomShape())
-	, _vertices(vertices)
-	, _fElasticity(elasticity) {
-	INKCustomShape* pCastCustomShape = static_cast<INKCustomShape*>(_pShape);
+	: _vertices(vertices)
+	, _fElasticity(elasticity) 
+	, _pShape(nullptr) {
+	_pShape = new INKCustomShape();
 
 	for(unsigned int i=0; i<vertices.size(); ++i) {
 
 		//build geometry
 		if(i == 0) {
-			pCastCustomShape->addPoint(vertices[0]);
+			_pShape->addPoint(vertices[0]);
 		} else if(i%2 ==1) {
-			pCastCustomShape->addPoint(vertices[1 + i/2]);
+			_pShape->addPoint(vertices[1 + i/2]);
 		} else {
-			pCastCustomShape->addPoint(vertices[vertices.size() - i/2]);
+			_pShape->addPoint(vertices[vertices.size() - i/2]);
 		}
 	}
-	pCastCustomShape->setBuildType(INKCustomShape::eStrip);
-	pCastCustomShape->build();
+	_pShape->setBuildType(INKCustomShape::eStrip);
+	_pShape->build();
 }
 
 INKPhysicSolid::~INKPhysicSolid() {
-
+	delete _pShape;
 }
 
-void INKPhysicSolid::computeCollision(INKParticle* pParticle, glm::vec3 partNextPos, glm::vec3 partNextVel, float fDt) {
+void INKPhysicSolid::computeCollision(glm::vec3 partPos, float fPartMass, glm::vec3 partNextPos, glm::vec3 partNextVel, float fDt, glm::vec3& partForce) {
 	for(unsigned int i=0; i<_vertices.size(); ++i) {
 
 			glm::vec2 vtxA = glm::vec2(_vertices[i].x, _vertices[i].y);
@@ -45,13 +45,14 @@ void INKPhysicSolid::computeCollision(INKParticle* pParticle, glm::vec3 partNext
 
 			glm::vec2 vecNormale(0.f);
 			glm::vec2 vecIntersection(0.f);
-			glm::vec2 currentPos = glm::vec2(pParticle->getPosition().x, pParticle->getPosition().y);
+			glm::vec2 currentPos = glm::vec2(partPos.x, partPos.y);
 			glm::vec2 nextPos = glm::vec2(partNextPos.x, partNextPos.y);
 			glm::vec2 nextVel = glm::vec2(partNextVel.x, partNextVel.y);
 
 			if(segmentIntersect(vtxA, vtxB, currentPos, nextPos, vecIntersection, vecNormale)) {
-				glm::vec2 forceToAdd = (_fElasticity*glm::dot(nextVel, -vecNormale)*pParticle->getMass()/fDt) * vecNormale;
-				pParticle->addForce(glm::vec3(forceToAdd, 0.f));
+				glm::vec2 forceToAdd = (_fElasticity*glm::dot(nextVel, -vecNormale)*fPartMass/fDt) * vecNormale;
+				partForce += glm::vec3(forceToAdd, 0.f);
+				break;
 			}
 		}
 }

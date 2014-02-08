@@ -90,9 +90,6 @@
     <ClCompile Include="src\renderer\shapes\INKSquareShape.cpp">
       <Filter>Fichiers sources\renderer\shapes</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\INKRenderable.cpp">
-      <Filter>Fichiers sources\renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\renderer\INKGLProgram.cpp">
       <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
@@ -101,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="src\system\INKCamera.cpp">
       <Filter>Fichiers sources\system</Filter>
-    </ClCompile>
-    <ClCompile Include="src\physics\INKParticle.cpp">
-      <Filter>Fichiers sources\physics</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\forces\INKForce.cpp">
       <Filter>Fichiers sources\physics\forces</Filter>
@@ -121,15 +115,6 @@
       <Filter>Fichiers sources\renderer\shapes</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\INKPhysicSolid.cpp">
-      <Filter>Fichiers sources\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\physics\forces\INKHookForce.cpp">
-      <Filter>Fichiers sources\physics\forces</Filter>
-    </ClCompile>
-    <ClCompile Include="src\physics\forces\INKBrakeForce.cpp">
-      <Filter>Fichiers sources\physics\forces</Filter>
-    </ClCompile>
-    <ClCompile Include="src\physics\INKQuadTreeParticleSystem.cpp">
       <Filter>Fichiers sources\physics</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\INKFluidParticleSystem.cpp">
@@ -167,9 +152,6 @@
     <ClInclude Include="includes\renderer\shapes\INKSquareShape.h">
       <Filter>Fichiers d%27en-tête\renderer\shapes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\renderer\INKRenderable.h">
-      <Filter>Fichiers d%27en-tête\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="includes\renderer\INKGLProgram.h">
       <Filter>Fichiers d%27en-tête\renderer</Filter>
     </ClInclude>
@@ -184,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="includes\renderer\shaders\fs_default.h">
       <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\physics\INKParticle.h">
-      <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
     <ClInclude Include="includes\physics\forces\INKForce.h">
       <Filter>Fichiers d%27en-tête\physics\forces</Filter>
@@ -204,15 +183,6 @@
       <Filter>Fichiers d%27en-tête\renderer\shapes</Filter>
     </ClInclude>
     <ClInclude Include="includes\physics\INKPhysicSolid.h">
-      <Filter>Fichiers d%27en-tête\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\physics\forces\INKHookForce.h">
-      <Filter>Fichiers d%27en-tête\physics\forces</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\physics\forces\INKBrakeForce.h">
-      <Filter>Fichiers d%27en-tête\physics\forces</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\physics\INKQuadTreeParticleSystem.h">
       <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
     <ClInclude Include="includes\renderer\shaders\fs_particle.h">

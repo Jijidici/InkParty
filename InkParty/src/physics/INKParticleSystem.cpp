@@ -9,16 +9,16 @@
 #include <algorithm>
 #include "glm.hpp"
 
-INKParticleSystem::INKParticleSystem() {
+INKParticleSystem::INKParticleSystem() 
+	: _iParticleCount(0) {
 
 }
 
 INKParticleSystem::~INKParticleSystem() {
-	for(std::vector<INKParticle*>::iterator itParticle=_particles.begin(); itParticle!=_particles.end(); ++itParticle) {
-		delete *itParticle;
-		*itParticle = nullptr;
-	}
-	_particles.clear();
+	_positions.clear();
+	_velocities.clear();
+	_forces.clear();
+	_mass.clear();
 
 	for(std::vector<INKForce*>::iterator itForce=_forcesToApply.begin(); itForce!=_forcesToApply.end(); ++itForce) {
 		delete *itForce;
@@ -33,31 +33,17 @@ INKParticleSystem::~INKParticleSystem() {
 	_solids.clear();
 }
 
-void INKParticleSystem::addRandomParticles(int iParticleCount, float fAmplitude) {
-	std::srand(0);
-
-	for(int i=0; i<iParticleCount; ++i) {
-		INKParticle* pNewParticle = new INKParticle();
-		float fRandX = 2.f*fAmplitude*(static_cast<float>(std::rand()%1000)/1000.f) - fAmplitude;
-		float fRandY = 2.f*fAmplitude*(static_cast<float>(std::rand()%1000)/1000.f) - fAmplitude;
-		float fMass = 1.f*(static_cast<float>(std::rand()%1000)/1000.f) + 0.2f;
-
-		pNewParticle->setPosition(glm::vec3(fRandX, fRandY, 0.f));
-		pNewParticle->setMass(fMass);
-		_particles.push_back(pNewParticle);
-	}
-}
-
 void INKParticleSystem::addParticles(int iParticleCount, float fMass) {
 	int iWidth = static_cast<int>(sqrt(iParticleCount));
 	int iHeight = iParticleCount/iWidth;
 	float fStep = fMass;
 
 	for(int i=0; i<iParticleCount; ++i) {
-		INKParticle* pNewParticle = new INKParticle();
-		pNewParticle->setPosition(glm::vec3(fStep*(i%iWidth - iWidth/2) -5.f, fStep*(i/iWidth - iHeight/2) + 10.f, 0.f));
-		pNewParticle->setMass(fMass);
-		_particles.push_back(pNewParticle);
+		_positions.push_back(glm::vec3(fStep*(i%iWidth - iWidth/2) -0.f, fStep*(i/iWidth - iHeight/2) + 10.f, 0.f));
+		_velocities.push_back(glm::vec3(0.f));
+		_forces.push_back(glm::vec3(0.f));
+		_mass.push_back(fMass);
+		++_iParticleCount;
 	}
 }
 
@@ -68,13 +54,13 @@ void INKParticleSystem::update(float fDt) {
 	}
 
 	if(fDt != 0.f) {
-		for(std::vector<INKParticle*>::iterator itPart=_particles.begin(); itPart!=_particles.end(); ++itPart) {
+		for(int i=0; i<_iParticleCount; ++i) {
 			glm::vec3 partNextPos;
 			glm::vec3 partNextVel;
-			getNextState(*itPart, partNextPos, partNextVel, fDt);
+			getNextState(i, partNextPos, partNextVel, fDt);
 
 			for(std::vector<INKPhysicSolid*>::iterator itSolid=_solids.begin(); itSolid!=_solids.end(); ++itSolid) {
-				(*itSolid)->computeCollision(*itPart, partNextPos, partNextVel, fDt);
+				(*itSolid)->computeCollision(_positions[i], _mass[i], partNextPos, partNextVel, fDt, _forces[i]);
 			}
 		}
 	}
@@ -83,20 +69,18 @@ void INKParticleSystem::update(float fDt) {
 }
 
 void INKParticleSystem::leapFrogSolve(float fDt) {
-	for(std::vector<INKParticle*>::iterator itPart=_particles.begin(); itPart!=_particles.end(); ++itPart) {
-		INKParticle* pCurrentPart = *itPart;
+	for(int i=0; i<_iParticleCount; ++i) {
+		glm::vec3 nextVelocity = _velocities[i] + fDt*(_forces[i]/_mass[i]);
+		_velocities[i] = nextVelocity;
 
-		glm::vec3 nextVelocity = pCurrentPart->getVelocity() + fDt*(pCurrentPart->getForce()/pCurrentPart->getMass());
-		pCurrentPart->setVelocity(nextVelocity);
+		glm::vec3 nextPosition = _positions[i] + fDt*nextVelocity;
+		_positions[i] = nextPosition;
 
-		glm::vec3 nextPosition = pCurrentPart->getPosition() + fDt*nextVelocity;
-		pCurrentPart->setPosition(nextPosition);
-
-		pCurrentPart->setForce(glm::vec3(0.f));
+		_forces[i] = glm::vec3(0.f);
 	}
 }
 
-void INKParticleSystem::getNextState(INKParticle* pParticle, glm::vec3& nextPos, glm::vec3& nextVel, float fDt) {
-	nextVel = pParticle->getVelocity() + fDt*(pParticle->getForce()/pParticle->getMass());
-	nextPos = pParticle->getPosition() + fDt*nextVel;
+void INKParticleSystem::getNextState(int iPartId, glm::vec3& nextPos, glm::vec3& nextVel, float fDt) {
+	nextVel = _velocities[iPartId] + fDt*(_forces[iPartId]/_mass[iPartId]);
+	nextPos = _positions[iPartId] + fDt*nextVel;
 }

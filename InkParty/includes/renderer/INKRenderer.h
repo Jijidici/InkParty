@@ -18,7 +18,6 @@ public:
 	static INKRenderer* getInstance();
 	
 	void			render();
-	void			add(INKRenderable* aRenderable);
 	void			add(INKParticleSystem* pSystem);
 
 	INKSquareShape*	getSquare();
@@ -36,7 +35,7 @@ protected:
 	INKSquareShape* _pSquareModel;
 	INKGLProgram*	_pDefaultShaderProgram;
 
-	std::vector<INKRenderable*> _toRender;
+	std::vector<INKParticleSystem*> _toRender;
 
 	INKCamera* _pCurrentCamera;
 };

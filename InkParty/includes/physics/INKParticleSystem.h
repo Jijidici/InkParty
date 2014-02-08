@@ -15,23 +15,31 @@ public:
 			INKParticleSystem();
 	virtual	~INKParticleSystem();
 
-	void			addRandomParticles(int iParticleCount, float fAmplitude);
 	void			addParticles(int iParticleCount, float fMass);
 	void			addSolid(INKPhysicSolid* pSolid) { _solids.push_back(pSolid); }
 	void			addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
 	virtual void	update(float fDt);
 
-	std::vector<INKParticle*>&		getParticles() { return _particles; }
-	INKParticle*					getParticle(int id) { return _particles[id]; }
-	int								getParticlesCount() const { return _particles.size(); }
+	glm::vec3						getPosition(int iPartId) { return _positions[iPartId]; }
+	glm::vec3						getVelocity(int iPartId) { return _velocities[iPartId]; }
+	glm::vec3						getForce(int iPartId) { return _forces[iPartId]; }
+	float							getMass(int iPartId) { return _mass[iPartId]; }
+	int								getParticleCount() const { return _iParticleCount; }
 	std::vector<INKPhysicSolid*>&	getSolids() { return _solids; }
 	int								getSolidsCount() const { return _solids.size(); }
 
+	void							accumForce(int iPartId, glm::vec3 force) { _forces[iPartId] += force; }
+
 protected:
 	void						leapFrogSolve(float fDt);
-	void						getNextState(INKParticle* pParticle, glm::vec3& nextPos, glm::vec3& nextVel, float fDt);
+	void						getNextState(int iPartId, glm::vec3& nextPos, glm::vec3& nextVel, float fDt);
 
-	std::vector<INKParticle*>		_particles;
+	int								_iParticleCount;
+	std::vector<glm::vec3>			_positions;
+	std::vector<glm::vec3>			_velocities;
+	std::vector<glm::vec3>			_forces;
+	std::vector<float>				_mass;
+
 	std::vector<INKPhysicSolid*>	_solids;
 	std::vector<INKForce*>			_forcesToApply;
 };

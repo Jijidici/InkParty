@@ -6,12 +6,13 @@
 
 #include "physics/forces/INKDynamicSpringForce.h"
 
-INKFluidParticleSystem::INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, int iCellSize) 
-	: _iSpaceW(iSpaceWidth)
+INKFluidParticleSystem::INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, float fCellSize) 
+	: INKParticleSystem()
+	, _iSpaceW(iSpaceWidth)
 	, _iSpaceH(iSpaceHeight) 
-	, _iCellSize(iCellSize)
-	, _iCellInWidthCount(_iSpaceW/_iCellSize)
-	, _iCellInHeightCount(_iSpaceH/_iCellSize){
+	, _fCellSize(fCellSize)
+	, _iCellInWidthCount(static_cast<int>(_iSpaceW/_fCellSize))
+	, _iCellInHeightCount(static_cast<int>(_iSpaceH/_fCellSize)){
 
 		_grid.resize(_iCellInWidthCount*_iCellInHeightCount);
 }
@@ -23,11 +24,9 @@ INKFluidParticleSystem::~INKFluidParticleSystem() {
 void INKFluidParticleSystem::update(float fDt) {
 	updateGrid();
 
-	for(unsigned int idPart=0; idPart<_particles.size(); ++idPart) {
-		INKParticle* pP1 = _particles[idPart];
-		glm::vec3 currentPos = pP1->getPosition();
-		int i = static_cast<int>(currentPos.x+(_iSpaceW/2.f))/_iCellSize;
-		int j = static_cast<int>(currentPos.y+(_iSpaceH/2.f))/_iCellSize;
+	for(int idPart=0; idPart<_iParticleCount; ++idPart) {
+		int i = static_cast<int>((_positions[idPart].x+(_iSpaceW/2.f))/_fCellSize);
+		int j = static_cast<int>((_positions[idPart].y+(_iSpaceH/2.f))/_fCellSize);
 
 		if(i>=0 && i<_iCellInWidthCount && j>=0 && j<_iCellInHeightCount) {
 			int idx = i + j*_iCellInWidthCount;
@@ -35,17 +34,17 @@ void INKFluidParticleSystem::update(float fDt) {
 			std::vector<int> neightbors = _grid[idx];
 			for(std::vector<int>::iterator itId=neightbors.begin(); itId<neightbors.end(); ++itId) {
 				if(idPart!=*itId) {
-					INKParticle* pP2 = _particles[*itId];
 
-					float d = glm::length(pP2->getPosition() - pP1->getPosition());
+					float d = glm::length(_positions[*itId] - _positions[idPart]);
 					//repulsion
-					if(d < (pP1->getMass() + pP2->getMass())*0.5f) {
-						INKDynamicSpringForce::getInstance()->apply(pP1, pP2, _fRepulsiveSpringRigidity, _fRepulsiveSpringLength, _fBrakeCoef, fDt);
+					float fRepulsDist = (_mass[idPart] + _mass[*itId])*0.5f;
+					if(d < fRepulsDist) {
+						INKDynamicSpringForce::getInstance()->apply(this, idPart, *itId, _fRepulsiveSpringRigidity, _fRepulsiveSpringLength, _fBrakeCoef, fDt);
 					}
 
 					//attraction
-					else if(d < (pP1->getMass() + pP2->getMass())*0.5f + 2.f*_fInfluenceDelta) {
-						INKDynamicSpringForce::getInstance()->apply(pP1, pP2, _fAttractiveSpringRigidity, _fAttractiveSpringLength, _fBrakeCoef, fDt);
+					else if(d < fRepulsDist + 2.f*_fInfluenceDelta) {
+						INKDynamicSpringForce::getInstance()->apply(this, idPart, *itId, _fAttractiveSpringRigidity, _fAttractiveSpringLength, _fBrakeCoef, fDt);
 					}
 				}
 			}
@@ -61,10 +60,9 @@ void INKFluidParticleSystem::updateGrid() {
 		it->clear();
 	}
 
-	for(unsigned int idPart=0; idPart<_particles.size(); ++idPart) {
-		glm::vec3 currentPos = _particles[idPart]->getPosition();
-		int i = static_cast<int>(currentPos.x+(_iSpaceW/2.f))/_iCellSize;
-		int j = static_cast<int>(currentPos.y+(_iSpaceH/2.f))/_iCellSize;
+	for(int idPart=0; idPart<_iParticleCount; ++idPart) {
+		int i = static_cast<int>((_positions[idPart].x+(_iSpaceW/2.f))/_fCellSize);
+		int j = static_cast<int>((_positions[idPart].y+(_iSpaceH/2.f))/_fCellSize);
 		if(i>=0 && i<_iCellInWidthCount && j>=0 && j<_iCellInHeightCount) {
 			int idx = i + j*_iCellInWidthCount;
 

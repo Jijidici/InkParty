@@ -20,17 +20,16 @@ INKDynamicSpringForce* INKDynamicSpringForce::getInstance() {
 	return _pInstance;
 }
 
-void INKDynamicSpringForce::apply(INKParticle* pP1, INKParticle* pP2, float fK, float fL, float fV, float fDt) {
+void INKDynamicSpringForce::apply(INKParticleSystem* pSystem, int iP1Id, int iP2Id, float fK, float fL, float fV, float fDt) {
 	float fEpsilon = 0.001f;
-	glm::vec3 p1p2 = pP2->getPosition() - pP1->getPosition();
+	glm::vec3 p1p2 = pSystem->getPosition(iP2Id) - pSystem->getPosition(iP1Id);
 	float d = sqrt(glm::dot(p1p2, p1p2));
 
 	glm::vec3 forceHook = (fK*(1-(fL/std::max(d, fEpsilon)))) * p1p2;
 	glm::vec3 brakeForce = glm::vec3(0.f);
 	if(fDt != 0) {
-		brakeForce = fV/fDt * (pP2->getVelocity() - pP1->getVelocity());
+		brakeForce = fV/fDt * (pSystem->getVelocity(iP2Id) - pSystem->getVelocity(iP1Id));
 	}
 
-	pP1->addForce(forceHook);
-	pP1->addForce(brakeForce);
+	pSystem->accumForce(iP1Id, forceHook+brakeForce);
 }

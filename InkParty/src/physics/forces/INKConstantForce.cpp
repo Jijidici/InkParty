@@ -16,7 +16,7 @@ INKConstantForce::~INKConstantForce() {
 }
 
 void INKConstantForce::apply(INKParticleSystem* pSystem) {
-	for(std::vector<INKParticle*>::iterator itPart=pSystem->getParticles().begin(); itPart!=pSystem->getParticles().end(); ++itPart) {
-		(*itPart)->addForce(_force);
+	for(int i=0; i<pSystem->getParticleCount(); ++i) {
+		pSystem->accumForce(i, _force);
 	}
 }

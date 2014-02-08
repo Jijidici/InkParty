@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include "GL/glew.h"
 #include "SDL.h"
+#include "gtc/matrix_transform.hpp"
 
 #include "renderer/shaders/vs_default.h"
 #include "renderer/shaders/fs_default.h"
@@ -56,8 +57,24 @@ void INKRenderer::render() {
 	glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	for(std::vector<INKRenderable*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
-		(*itRend)->render();
+	for(std::vector<INKParticleSystem*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
+		getDefaultShaderProgram()->use();
+		getDefaultShaderProgram()->updateUniforms();
+
+		for(std::vector<INKPhysicSolid*>::iterator itSolid=(*itRend)->getSolids().begin(); itSolid!=(*itRend)->getSolids().end(); ++itSolid) {
+			(*itSolid)->getShape()->draw();
+		}
+
+		for(int i=0; i<(*itRend)->getParticleCount(); ++i) {
+			glm::mat4 modelMatrix = glm::mat4(1.f);
+			modelMatrix = glm::translate(modelMatrix, (*itRend)->getPosition(i));
+			modelMatrix = glm::scale(modelMatrix, glm::vec3((*itRend)->getMass(i)));
+			getDefaultShaderProgram()->sendModelUniform(modelMatrix);
+
+			getSquare()->draw();
+		}
+
+		getDefaultShaderProgram()->sendModelUniform(glm::mat4(1.f));
 	}
 
 	glDisable(GL_BLEND);
@@ -65,18 +82,8 @@ void INKRenderer::render() {
 	SDL_GL_SwapBuffers();
 }
 
-void INKRenderer::add(INKRenderable* aRenderable) {
-	_toRender.push_back(aRenderable);
-}
-
 void INKRenderer::add(INKParticleSystem* pSystem) {
-	for(std::vector<INKPhysicSolid*>::iterator it=pSystem->getSolids().begin(); it!=pSystem->getSolids().end(); ++it) {
-		add(*it);
-	}
-	
-	for(std::vector<INKParticle*>::iterator it=pSystem->getParticles().begin(); it!=pSystem->getParticles().end(); ++it) {
-		add(*it);
-	}
+	_toRender.push_back(pSystem);
 }
 
 INKSquareShape* INKRenderer::getSquare() {
