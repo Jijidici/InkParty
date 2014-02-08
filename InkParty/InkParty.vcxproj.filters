@@ -126,6 +126,9 @@
     <ClCompile Include="src\physics\forces\INKAttractiveForce.cpp">
       <Filter>Fichiers sources\physics\forces</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\INKRenderable.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -202,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="includes\physics\forces\INKAttractiveForce.h">
       <Filter>Fichiers d%27en-tête\physics\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\INKRenderable.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\fs_well.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\vs_well.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ INKRenderable::INKRenderable(INKShape* pShape)
 	, _scale(glm::vec3(1.f))
 	, _fRotation(0.f)
 	, _pShape(pShape)
-	, _pProgram(INKRenderer::getInstance()->getDefaultShaderProgram()){
+	, _pProgram(INKRenderer::getInstance()->getShader("default")){
 
 }
 

@@ -10,6 +10,7 @@
 #include <map>
 #include "GL/glew.h"
 #include "renderer/INKGLProgram.h"
+#include "renderer/INKRenderable.h"
 #include "renderer/shapes/INKSquareShape.h"
 #include "system/INKCamera.h"
 #include "physics/INKParticleSystem.h"
@@ -19,7 +20,8 @@ public:
 	static INKRenderer* getInstance();
 	
 	void			render();
-	void			add(INKParticleSystem* pSystem);
+	void			add(INKParticleSystem* pSystem) { _renderSystems.push_back(pSystem); }
+	void			add(INKRenderable* pRenderable) { _renderRenderables.push_back(pRenderable); }
 
 	void			addShader(std::string sTag, const GLchar* vsSource, const GLchar* fsSource);
 	INKGLProgram*	getShader(std::string sTag);
@@ -38,7 +40,8 @@ protected:
 	INKSquareShape* _pSquareModel;
 	INKCamera* _pCurrentCamera;
 	std::map<std::string, INKGLProgram*> _shadersMap;
-	std::vector<INKParticleSystem*> _toRender;
+	std::vector<INKParticleSystem*> _renderSystems;
+	std::vector<INKRenderable*> _renderRenderables;
 };
 
 #endif //__INK_RENDERER_H__

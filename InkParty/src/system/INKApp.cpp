@@ -7,6 +7,7 @@
 #include "SDL.h"
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
+#include "renderer/INKRenderable.h"
 #include "renderer/shapes/INKCustomShape.h"
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
@@ -64,6 +65,10 @@ void INKApp::init() {
 	_pPartSystem->addWell(glm::vec3(0.f, 0.f, 0.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 
+	INKRenderable* pMainWell = new INKRenderable(INKRenderer::getInstance()->getSquare());
+	pMainWell->setScale(glm::vec3(2.5f));
+	pMainWell->setProgram(INKRenderer::getInstance()->getShader("well"));
+	INKRenderer::getInstance()->add(pMainWell);
 	//test zone
 }
 

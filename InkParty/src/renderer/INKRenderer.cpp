@@ -13,6 +13,8 @@
 #include "renderer/shaders/fs_default.h"
 #include "renderer/shaders/vs_particle.h"
 #include "renderer/shaders/fs_particle.h"
+#include "renderer/shaders/vs_well.h"
+#include "renderer/shaders/fs_well.h"
 #include "physics/INKParticle.h"
 #include "physics/INKPhysicSolid.h"
 
@@ -30,12 +32,16 @@ INKRenderer::~INKRenderer() {
 		_pSquareModel = nullptr;
 	}
 
+	for(std::vector<INKRenderable*>::iterator itRend=_renderRenderables.begin(); itRend!=_renderRenderables.end(); ++itRend) {
+		delete *itRend;
+	}
+
 	//delete shaders
 	for(std::map<std::string, INKGLProgram*>::iterator it=_shadersMap.begin(); it!=_shadersMap.end(); ++it) {
 		delete it->second;
 	}
 
-	_toRender.clear();
+	_renderSystems.clear();
 	_pInstance = nullptr;
 }
 
@@ -59,6 +65,7 @@ void INKRenderer::init() {
 	//build shaders
 	addShader("default", inkshaders::vs_default, inkshaders::fs_default);
 	addShader("particles", inkshaders::vs_particle, inkshaders::fs_particle);
+	addShader("well", inkshaders::vs_well, inkshaders::fs_well);
 }
 
 void INKRenderer::render() {
@@ -67,7 +74,7 @@ void INKRenderer::render() {
 	glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	for(std::vector<INKParticleSystem*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
+	for(std::vector<INKParticleSystem*>::iterator itRend=_renderSystems.begin(); itRend!=_renderSystems.end(); ++itRend) {
 
 		INKGLProgram* pDefaultProgram = getShader("default");
 		pDefaultProgram->use();
@@ -89,13 +96,13 @@ void INKRenderer::render() {
 		}
 	}
 
+	for(std::vector<INKRenderable*>::iterator itRend=_renderRenderables.begin(); itRend!=_renderRenderables.end(); ++itRend) {
+		(*itRend)->render();
+	}
+
 	glDisable(GL_BLEND);
 
 	SDL_GL_SwapBuffers();
-}
-
-void INKRenderer::add(INKParticleSystem* pSystem) {
-	_toRender.push_back(pSystem);
 }
 
 void INKRenderer::addShader(std::string sTag, const GLchar* vsSource, const GLchar* fsSource) {
