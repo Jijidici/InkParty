@@ -6,12 +6,12 @@
 
 #include "physics/forces/INKDynamicSpringForce.h"
 
-INKFluidParticleSystem::INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, int iCellSize) 
+INKFluidParticleSystem::INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, float fCellSize) 
 	: _iSpaceW(iSpaceWidth)
 	, _iSpaceH(iSpaceHeight) 
-	, _iCellSize(iCellSize)
-	, _iCellInWidthCount(_iSpaceW/_iCellSize)
-	, _iCellInHeightCount(_iSpaceH/_iCellSize){
+	, _fCellSize(fCellSize)
+	, _iCellInWidthCount(static_cast<int>(_iSpaceW/_fCellSize))
+	, _iCellInHeightCount(static_cast<int>(_iSpaceH/_fCellSize)){
 
 		_grid.resize(_iCellInWidthCount*_iCellInHeightCount);
 }
@@ -26,8 +26,8 @@ void INKFluidParticleSystem::update(float fDt) {
 	for(unsigned int idPart=0; idPart<_particles.size(); ++idPart) {
 		INKParticle* pP1 = _particles[idPart];
 		glm::vec3 currentPos = pP1->getPosition();
-		int i = static_cast<int>(currentPos.x+(_iSpaceW/2.f))/_iCellSize;
-		int j = static_cast<int>(currentPos.y+(_iSpaceH/2.f))/_iCellSize;
+		int i = (currentPos.x+(_iSpaceW/2.f))/static_cast<int>(_fCellSize);
+		int j = (currentPos.y+(_iSpaceH/2.f))/static_cast<int>(_fCellSize);
 
 		if(i>=0 && i<_iCellInWidthCount && j>=0 && j<_iCellInHeightCount) {
 			int idx = i + j*_iCellInWidthCount;
@@ -63,8 +63,8 @@ void INKFluidParticleSystem::updateGrid() {
 
 	for(unsigned int idPart=0; idPart<_particles.size(); ++idPart) {
 		glm::vec3 currentPos = _particles[idPart]->getPosition();
-		int i = static_cast<int>(currentPos.x+(_iSpaceW/2.f))/_iCellSize;
-		int j = static_cast<int>(currentPos.y+(_iSpaceH/2.f))/_iCellSize;
+		int i = (currentPos.x+(_iSpaceW/2.f))/static_cast<int>(_fCellSize);
+		int j = (currentPos.y+(_iSpaceH/2.f))/static_cast<int>(_fCellSize);
 		if(i>=0 && i<_iCellInWidthCount && j>=0 && j<_iCellInHeightCount) {
 			int idx = i + j*_iCellInWidthCount;
 

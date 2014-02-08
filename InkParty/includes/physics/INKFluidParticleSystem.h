@@ -10,7 +10,7 @@
 
 class INKFluidParticleSystem : public INKParticleSystem {
 public:
-	INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, int iCellSize);
+	INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, float fCellSize);
 	~INKFluidParticleSystem();
 
 	virtual void	update(float fDt);
@@ -32,7 +32,7 @@ protected:
 
 	int		_iSpaceW;
 	int		_iSpaceH;
-	int		_iCellSize;
+	float		_fCellSize;
 	int		_iCellInWidthCount;
 	int		_iCellInHeightCount;
 	std::vector<std::vector<int>> _grid;
