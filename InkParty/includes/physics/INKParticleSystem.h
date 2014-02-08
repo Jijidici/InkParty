@@ -12,10 +12,11 @@
 
 class INKParticleSystem {
 public:
-			INKParticleSystem();
+			INKParticleSystem(int iMaxCount, float fStandardMass);
 	virtual	~INKParticleSystem();
 
 	void			addParticles(int iParticleCount, float fMass);
+	void			addSpawner(glm::vec3 spawnPoint) { _spawners.push_back(spawnPoint); }
 	void			addSolid(INKPhysicSolid* pSolid) { _solids.push_back(pSolid); }
 	void			addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
 	virtual void	update(float fDt);
@@ -28,6 +29,9 @@ public:
 	std::vector<INKPhysicSolid*>&	getSolids() { return _solids; }
 	int								getSolidsCount() const { return _solids.size(); }
 
+	void							setMaxPartCount(int iCount) { _iMaxPartCount = iCount; }
+	void							setStandardMass(float fMass) { _fStandardMass = fMass; }
+
 	void							accumForce(int iPartId, glm::vec3 force) { _forces[iPartId] += force; }
 
 protected:
@@ -35,11 +39,14 @@ protected:
 	void						getNextState(int iPartId, glm::vec3& nextPos, glm::vec3& nextVel, float fDt);
 
 	int								_iParticleCount;
+	int								_iMaxPartCount;
+	float							_fStandardMass;
 	std::vector<glm::vec3>			_positions;
 	std::vector<glm::vec3>			_velocities;
 	std::vector<glm::vec3>			_forces;
 	std::vector<float>				_mass;
 
+	std::vector<glm::vec3>			_spawners;
 	std::vector<INKPhysicSolid*>	_solids;
 	std::vector<INKForce*>			_forcesToApply;
 };

@@ -9,9 +9,12 @@
 #include <algorithm>
 #include "glm.hpp"
 
-INKParticleSystem::INKParticleSystem() 
-	: _iParticleCount(0) {
+INKParticleSystem::INKParticleSystem(int iMaxCount, float fStandardMass) 
+	: _iParticleCount(0) 
+	, _iMaxPartCount(iMaxCount)
+	, _fStandardMass(fStandardMass) {
 
+	srand(static_cast<unsigned int>(time(NULL)));
 }
 
 INKParticleSystem::~INKParticleSystem() {
@@ -48,6 +51,17 @@ void INKParticleSystem::addParticles(int iParticleCount, float fMass) {
 }
 
 void INKParticleSystem::update(float fDt) {
+	//spawn
+	if(_iParticleCount < _iMaxPartCount) {
+		for(std::vector<glm::vec3>::iterator itSpawn=_spawners.begin(); itSpawn!=_spawners.end(); ++itSpawn) {
+			_positions.push_back(*itSpawn + glm::vec3(0.1f*(rand()%10), 0.1f*(rand()%10), 0.f));
+			_velocities.push_back(glm::vec3(0.f));
+			_forces.push_back(glm::vec3(0.f));
+			_mass.push_back(_fStandardMass);
+			++_iParticleCount;
+		}
+	}
+
 	for(std::vector<INKForce*>::iterator itForce=_forcesToApply.begin(); itForce!=_forcesToApply.end(); ++itForce) {
 		(*itForce)->setDt(fDt);
 		(*itForce)->apply(this);

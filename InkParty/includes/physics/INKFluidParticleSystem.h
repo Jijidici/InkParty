@@ -10,7 +10,7 @@
 
 class INKFluidParticleSystem : public INKParticleSystem {
 public:
-	INKFluidParticleSystem(int iSpaceWidth, int iSpaceHeight, float fCellSize);
+	INKFluidParticleSystem(int iMaxCount, float fStandardMass, int iSpaceWidth, int iSpaceHeight, float fCellSize);
 	~INKFluidParticleSystem();
 
 	virtual void	update(float fDt);

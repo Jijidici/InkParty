@@ -21,7 +21,7 @@ void INKAttractiveForce::apply(INKParticleSystem* pSystem) {
 		glm::vec3 currentSpeed = pSystem->getVelocity(i);
 
 		float fPowerToApply = _fPower;
-		if(glm::dot(currentSpeed, toAttracDir) <= 0) {
+		if(glm::dot(currentSpeed, toAttracDir) <= 0.f) {
 			fPowerToApply *= _fBrakeCoef;
 		}
 		pSystem->accumForce(i, fPowerToApply*toAttracDir);
