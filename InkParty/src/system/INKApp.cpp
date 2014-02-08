@@ -61,6 +61,7 @@ void INKApp::init() {
 	_pPartSystem->addSpawner(glm::vec3(0.f, 9.f, 0.f));
 	_pPartSystem->addSpawner(glm::vec3(-4.f, -4.f, 0.f));
 	_pPartSystem->addSpawner(glm::vec3(4.f, -4.f, 0.f));
+	_pPartSystem->addWell(glm::vec3(0.f, 0.f, 0.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 
 	//test zone

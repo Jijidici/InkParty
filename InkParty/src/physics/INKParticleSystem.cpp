@@ -80,6 +80,26 @@ void INKParticleSystem::update(float fDt) {
 	}
 
 	leapFrogSolve(fDt);
+
+	// remove particles
+	for(std::vector<glm::vec3>::iterator itWell=_wells.begin(); itWell!=_wells.end(); ++itWell) {
+		bool bRemove = true;;
+		while(bRemove) {
+			bRemove = false;
+			for(int i=0; i<_iParticleCount; ++i) {
+				glm::vec3 wellToPart = _positions[i]-*itWell;
+				if(glm::dot(wellToPart, wellToPart) < 2.) {
+					_positions.erase(_positions.begin()+i);
+					_velocities.erase(_velocities.begin()+i);
+					_forces.erase(_forces.begin()+i);
+					_mass.erase(_mass.begin()+i);
+					--_iParticleCount;
+					bRemove = true;
+					break;
+				}
+			}
+		}
+	}
 }
 
 void INKParticleSystem::leapFrogSolve(float fDt) {

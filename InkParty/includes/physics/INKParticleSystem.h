@@ -17,6 +17,7 @@ public:
 
 	void			addParticles(int iParticleCount, float fMass);
 	void			addSpawner(glm::vec3 spawnPoint) { _spawners.push_back(spawnPoint); }
+	void			addWell(glm::vec3 wellPoint) { _wells.push_back(wellPoint); }
 	void			addSolid(INKPhysicSolid* pSolid) { _solids.push_back(pSolid); }
 	void			addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
 	virtual void	update(float fDt);
@@ -47,6 +48,7 @@ protected:
 	std::vector<float>				_mass;
 
 	std::vector<glm::vec3>			_spawners;
+	std::vector<glm::vec3>			_wells;
 	std::vector<INKPhysicSolid*>	_solids;
 	std::vector<INKForce*>			_forcesToApply;
 };
