@@ -5,31 +5,37 @@
 #include "renderer\INKRenderer.h"
 
 #include <stdexcept>
-#include "GL/glew.h"
+#include <cassert>
 #include "SDL.h"
 #include "gtc/matrix_transform.hpp"
 
 #include "renderer/shaders/vs_default.h"
 #include "renderer/shaders/fs_default.h"
+#include "renderer/shaders/vs_particle.h"
+#include "renderer/shaders/fs_particle.h"
 #include "physics/INKParticle.h"
 #include "physics/INKPhysicSolid.h"
 
 static INKRenderer* _pInstance = nullptr;
 
 INKRenderer::INKRenderer() 
-	: _pSquareModel(nullptr) {
+	: _pSquareModel(nullptr) 
+	, _pCurrentCamera(nullptr) {
 
 }
 
 INKRenderer::~INKRenderer() {
 	if(_pSquareModel != nullptr) {
 		delete _pSquareModel;
-
-		_toRender.clear();
-
 		_pSquareModel = nullptr;
 	}
 
+	//delete shaders
+	for(std::map<std::string, INKGLProgram*>::iterator it=_shadersMap.begin(); it!=_shadersMap.end(); ++it) {
+		delete it->second;
+	}
+
+	_toRender.clear();
 	_pInstance = nullptr;
 }
 
@@ -49,6 +55,10 @@ void INKRenderer::init() {
 	}
 	
 	glClearColor(0.2f, 0.2f, 0.2f, 1.f);
+
+	//build shaders
+	addShader("default", inkshaders::vs_default, inkshaders::fs_default);
+	addShader("particles", inkshaders::vs_particle, inkshaders::fs_particle);
 }
 
 void INKRenderer::render() {
@@ -58,23 +68,25 @@ void INKRenderer::render() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	for(std::vector<INKParticleSystem*>::iterator itRend=_toRender.begin(); itRend!=_toRender.end(); ++itRend) {
-		getDefaultShaderProgram()->use();
-		getDefaultShaderProgram()->updateUniforms();
 
+		INKGLProgram* pDefaultProgram = getShader("default");
+		pDefaultProgram->use();
+		pDefaultProgram->updateUniforms();
 		for(std::vector<INKPhysicSolid*>::iterator itSolid=(*itRend)->getSolids().begin(); itSolid!=(*itRend)->getSolids().end(); ++itSolid) {
 			(*itSolid)->getShape()->draw();
 		}
 
+		INKGLProgram* pParticleShader = getShader("particles");
+		pParticleShader->use();
+		pParticleShader->updateUniforms();
 		for(int i=0; i<(*itRend)->getParticleCount(); ++i) {
 			glm::mat4 modelMatrix = glm::mat4(1.f);
 			modelMatrix = glm::translate(modelMatrix, (*itRend)->getPosition(i));
 			modelMatrix = glm::scale(modelMatrix, glm::vec3((*itRend)->getMass(i)));
-			getDefaultShaderProgram()->sendModelUniform(modelMatrix);
+			pParticleShader->sendModelUniform(modelMatrix);
 
 			getSquare()->draw();
 		}
-
-		getDefaultShaderProgram()->sendModelUniform(glm::mat4(1.f));
 	}
 
 	glDisable(GL_BLEND);
@@ -86,19 +98,22 @@ void INKRenderer::add(INKParticleSystem* pSystem) {
 	_toRender.push_back(pSystem);
 }
 
+void INKRenderer::addShader(std::string sTag, const GLchar* vsSource, const GLchar* fsSource) {
+	INKGLProgram* pAddedProgram = new INKGLProgram();
+	pAddedProgram->buildProgram(vsSource, fsSource);
+	_shadersMap.insert(std::pair<std::string, INKGLProgram*>(sTag, pAddedProgram));
+}
+
+INKGLProgram* INKRenderer::getShader(std::string sTag) {
+	std::map<std::string, INKGLProgram*>::iterator itRet = _shadersMap.find(sTag);
+	assert(itRet != _shadersMap.end());
+	return itRet->second;
+}
+
 INKSquareShape* INKRenderer::getSquare() {
 	if(_pSquareModel == nullptr) {
 		_pSquareModel = new INKSquareShape();
 	}
 
 	return _pSquareModel;
-}
-
-INKGLProgram* INKRenderer::getDefaultShaderProgram() {
-	if(_pDefaultShaderProgram == nullptr) {
-		_pDefaultShaderProgram = new INKGLProgram();
-		_pDefaultShaderProgram->buildProgram(inkshaders::vs_default, inkshaders::fs_default);
-	}
-	
-	return _pDefaultShaderProgram;
 }
