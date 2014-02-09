@@ -34,6 +34,12 @@ INKParticleSystem::~INKParticleSystem() {
 		*itSolid = nullptr;
 	}
 	_solids.clear();
+
+	for(std::vector<INKHexagon*>::iterator itHex=_hexagons.begin(); itHex!=_hexagons.end(); ++itHex) {
+		delete *itHex;
+		*itHex = nullptr;
+	}
+	_hexagons.clear();
 }
 
 void INKParticleSystem::addParticles(int iParticleCount, float fMass) {
@@ -75,6 +81,10 @@ void INKParticleSystem::update(float fDt) {
 
 			for(std::vector<INKPhysicSolid*>::iterator itSolid=_solids.begin(); itSolid!=_solids.end(); ++itSolid) {
 				(*itSolid)->computeCollision(_positions[i], _mass[i], partNextPos, partNextVel, fDt, _forces[i]);
+			}
+
+			for(std::vector<INKHexagon*>::iterator itHex=_hexagons.begin(); itHex!=_hexagons.end(); ++itHex) {
+				(*itHex)->computeCollision(_positions[i], _mass[i], partNextPos, partNextVel, fDt, _forces[i]);
 			}
 		}
 	}

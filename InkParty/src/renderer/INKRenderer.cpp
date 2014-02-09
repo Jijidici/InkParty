@@ -83,6 +83,10 @@ void INKRenderer::render() {
 			(*itSolid)->getShape()->draw();
 		}
 
+		for(std::vector<INKHexagon*>::iterator itHex=(*itRend)->getHexagons().begin(); itHex!=(*itRend)->getHexagons().end(); ++itHex) {
+			(*itHex)->draw();
+		}
+
 		INKGLProgram* pParticleShader = getShader("particles");
 		pParticleShader->use();
 		pParticleShader->updateUniforms();

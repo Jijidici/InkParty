@@ -23,6 +23,7 @@
     <ClCompile Include="src\physics\forces\INKDynamicSpringForce.cpp" />
     <ClCompile Include="src\physics\forces\INKForce.cpp" />
     <ClCompile Include="src\physics\INKFluidParticleSystem.cpp" />
+    <ClCompile Include="src\physics\INKHexagon.cpp" />
     <ClCompile Include="src\physics\INKParticleSystem.cpp" />
     <ClCompile Include="src\physics\INKPhysicSolid.cpp" />
     <ClCompile Include="src\renderer\INKGLProgram.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="includes\physics\forces\INKConstantForce.h" />
     <ClInclude Include="includes\physics\forces\INKForce.h" />
     <ClInclude Include="includes\physics\INKFluidParticleSystem.h" />
+    <ClInclude Include="includes\physics\INKHexagon.h" />
     <ClInclude Include="includes\physics\INKParticleSystem.h" />
     <ClInclude Include="includes\physics\INKPhysicSolid.h" />
     <ClInclude Include="includes\renderer\INKGLProgram.h" />

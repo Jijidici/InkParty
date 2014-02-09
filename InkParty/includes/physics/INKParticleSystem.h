@@ -8,6 +8,7 @@
 #include <vector>
 #include "physics/INKParticle.h"
 #include "physics/INKPhysicSolid.h"
+#include "physics/INKHexagon.h"
 #include "physics/forces/INKForce.h"
 
 class INKParticleSystem {
@@ -19,6 +20,7 @@ public:
 	void			addSpawner(glm::vec3 spawnPoint) { _spawners.push_back(spawnPoint); }
 	void			addWell(glm::vec3 wellPoint) { _wells.push_back(wellPoint); }
 	void			addSolid(INKPhysicSolid* pSolid) { _solids.push_back(pSolid); }
+	void			addHexagon(INKHexagon* pHex) { _hexagons.push_back(pHex); }
 	void			addForce(INKForce* pForce) { _forcesToApply.push_back(pForce); }
 	virtual void	update(float fDt);
 
@@ -29,6 +31,7 @@ public:
 	int								getParticleCount() const { return _iParticleCount; }
 	std::vector<INKPhysicSolid*>&	getSolids() { return _solids; }
 	int								getSolidsCount() const { return _solids.size(); }
+	std::vector<INKHexagon*>&		getHexagons() { return _hexagons; }
 
 	void							setMaxPartCount(int iCount) { _iMaxPartCount = iCount; }
 	void							setStandardMass(float fMass) { _fStandardMass = fMass; }
@@ -50,6 +53,7 @@ protected:
 	std::vector<glm::vec3>			_spawners;
 	std::vector<glm::vec3>			_wells;
 	std::vector<INKPhysicSolid*>	_solids;
+	std::vector<INKHexagon*>		_hexagons;
 	std::vector<INKForce*>			_forcesToApply;
 };
 

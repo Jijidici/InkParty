@@ -129,6 +129,9 @@
     <ClCompile Include="src\renderer\INKRenderable.cpp">
       <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\physics\INKHexagon.cpp">
+      <Filter>Fichiers sources\physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="includes\renderer\shaders\vs_well.h">
       <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\physics\INKHexagon.h">
+      <Filter>Fichiers d%27en-tête\physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
