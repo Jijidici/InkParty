@@ -2,8 +2,11 @@
 	INKApp.cpp - @Jijidici - 09/01/2014
 ************************************************************************ */
 
+#define _USE_MATH_DEFINES
+
 #include "system/INKApp.h"
 
+#include <cmath>
 #include "SDL.h"
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
@@ -59,9 +62,10 @@ void INKApp::init() {
 	_pPartSystem->setBrakeCoef(0.00001f);
 	_pPartSystem->setInfluenceDelta(0.2f);
 	_pPartSystem->addForce(new INKAttractiveForce(glm::vec3(0.f), 1.5f, 2.f));
-	_pPartSystem->addSpawner(glm::vec3(0.f, 9.f, 0.f));
-	_pPartSystem->addSpawner(glm::vec3(-4.f, -4.f, 0.f));
-	_pPartSystem->addSpawner(glm::vec3(4.f, -4.f, 0.f));
+	_pPartSystem->addSpawner(glm::vec3(0.f, 10.f, 0.f));
+	_pPartSystem->addSpawner(glm::vec3(-10.f, 0.f, 0.f));
+	_pPartSystem->addSpawner(glm::vec3(0.f, -10.f, 0.f));
+	_pPartSystem->addSpawner(glm::vec3(10.f, 0.f, 0.f));
 	_pPartSystem->addWell(glm::vec3(0.f, 0.f, 0.f));
 	INKRenderer::getInstance()->add(_pPartSystem);
 
@@ -69,6 +73,25 @@ void INKApp::init() {
 	pMainWell->setScale(glm::vec3(2.5f));
 	pMainWell->setProgram(INKRenderer::getInstance()->getShader("well"));
 	INKRenderer::getInstance()->add(pMainWell);
+
+	// create hexagon
+	float fStepAngle = (2.f*M_PI)/8.f;
+	for(int j=1; j<=3; ++j) {
+		for(int i=0; i<8; ++i) {
+			float fCurrentAlpha = i*fStepAngle;
+			float fNextAlpha = (i+1)*fStepAngle;
+
+			std::vector<glm::vec3> points;
+			points.push_back(2.f*j*glm::vec3(cos(fCurrentAlpha), sin(fCurrentAlpha), 0.f));
+			points.push_back(2.f*j*glm::vec3(cos(fNextAlpha), sin(fNextAlpha), 0.f));
+			points.push_back((2.f*j+1)*glm::vec3(cos(fNextAlpha), sin(fNextAlpha), 0.f));
+			points.push_back((2.f*j+1)*glm::vec3(cos(fCurrentAlpha), sin(fCurrentAlpha), 0.f));
+
+			INKPhysicSolid* pHexSeg = new INKPhysicSolid(points, 1.f);
+			_pPartSystem->addSolid(pHexSeg);		
+		}
+	}
+
 	//test zone
 }
 
