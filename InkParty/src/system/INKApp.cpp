@@ -54,7 +54,7 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	_pPartSystem = new INKFluidParticleSystem(256, 0.3f, 20, static_cast<int>(20.f*_pMainFrame->getRatio()), 0.2f);
+	_pPartSystem = new INKFluidParticleSystem(256, 0.3f, 20, static_cast<int>(20.f*_pMainFrame->getRatio()), 0.5f);
 	_pPartSystem->setSpringRigidity(5.f, 2.f);
 	_pPartSystem->setSpringLengths(0.3f, 0.3f);
 	_pPartSystem->setBrakeCoef(0.00001f);

@@ -7,7 +7,8 @@
 
 #include <cmath>
 
-INKHexagon::INKHexagon(int iSegmentCount, float fRadius) {
+INKHexagon::INKHexagon(int iSegmentCount, float fRadius) 
+	: _fRadius(fRadius) {
 	float fStepAngle = (2.f*M_PI)/static_cast<float>(iSegmentCount);
 	for(int i=0; i<iSegmentCount; ++i) {
 		float fCurrentAlpha = i*fStepAngle;
@@ -38,7 +39,11 @@ void INKHexagon::draw() {
 }
 
 void INKHexagon::computeCollision(glm::vec3 partPos, float fPartMass, glm::vec3 partNextPos, glm::vec3 partNextVel, float fDt, glm::vec3& partForce) {
-	for(std::vector<INKPhysicSolid*>::iterator itSolid=_segments.begin(); itSolid!=_segments.end(); ++itSolid) {
-		(*itSolid)->computeCollision(partPos, fPartMass, partNextPos, partNextVel, fDt, partForce);
+	float fFromCenterDist = glm::length(partNextPos);
+
+	if(fFromCenterDist >= _fRadius && fFromCenterDist <= _fRadius+1) {
+		for(std::vector<INKPhysicSolid*>::iterator itSolid=_segments.begin(); itSolid!=_segments.end(); ++itSolid) {
+			(*itSolid)->computeCollision(partPos, fPartMass, partNextPos, partNextVel, fDt, partForce);
+		}
 	}
 }
