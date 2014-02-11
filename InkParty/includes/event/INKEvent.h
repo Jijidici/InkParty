@@ -8,7 +8,8 @@
 
 enum EEventType {
 	eQuitEvent,
-	eKeyEvent
+	eKeyEvent,
+	eMouseMoveEvent
 };
 
 class INKEvent {

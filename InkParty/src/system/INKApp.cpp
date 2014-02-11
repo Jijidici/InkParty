@@ -15,6 +15,7 @@
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
+#include "event/INKMouseMoveEvent.h"
 #include "physics/INKParticle.h"
 #include "physics/INKHexagon.h"
 #include "physics/forces/INKAttractiveForce.h"
@@ -42,6 +43,15 @@ void INKApp::onEvent(INKEvent* pE) {
 			_bLoop = false;
 		}
 	}
+
+	else if(pE->getType() == eMouseMoveEvent) {
+		INKMouseMoveEvent* pMouseMoveE = static_cast<INKMouseMoveEvent*>(pE);
+		if(pMouseMoveE->isLeftButtonPressed()) {
+			_pPartSystem->rotateUpperHexagon(pMouseMoveE->getMousePos().x);
+		}else if(pMouseMoveE->isRightButtonPressed()) {
+			_pPartSystem->rotateDownerHexagon(pMouseMoveE->getMousePos().x);
+		}
+	}
 }
 
 void INKApp::init() {
@@ -52,6 +62,7 @@ void INKApp::init() {
 	//events
 	INKEventManager::getInstance()->addListener(this, eQuitEvent);
 	INKEventManager::getInstance()->addListener(this, eKeyEvent);
+	INKEventManager::getInstance()->addListener(this, eMouseMoveEvent);
 
 	//test zone
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
@@ -72,7 +83,6 @@ void INKApp::launch() {
 
 		INKEventManager::getInstance()->manageEvent(_pMainFrame);
 
-		_pPartSystem->rotateUpperHexagon(10.f);
 		_pPartSystem->update(fDt);
 
 		fDt = _pMainFrame->computeFrameTime();

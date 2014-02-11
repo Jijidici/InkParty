@@ -29,6 +29,7 @@ private:
 
 	std::vector<INKEventListener*>	_quitEventListeners;
 	std::vector<INKEventListener*>	_keyEventListeners;
+	std::vector<INKEventListener*>	_mouseMoveEventListeners;
 };
 
 #endif //__INK_EVENT_MANAGER_H__
