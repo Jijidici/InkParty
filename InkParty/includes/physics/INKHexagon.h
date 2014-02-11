@@ -16,11 +16,16 @@ public:
 	void draw();
 	void computeCollision(glm::vec3 partPos, float fPartMass, glm::vec3 partNextPos, glm::vec3 partNextVel, float fDt, glm::vec3& partForce);
 
+	void setAngle(float fAngle);
+	float getAngle() { return _fAngle; }
+
 protected:
 	int	  _iSegmentCount;
 	float _fRadius;
+	float _fAngle;
 	std::vector<INKPhysicSolid*> _segments;
 	std::vector<bool> _showSeg;
+
 };
 
 #endif //__INK_HEXAGON_H__

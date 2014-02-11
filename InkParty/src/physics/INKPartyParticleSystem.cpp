@@ -42,3 +42,8 @@ void INKPartyParticleSystem::init() {
 	_hexagons[0]->hideSegments(2);
 	_hexagons[1]->hideSegments(3);
 }
+
+void INKPartyParticleSystem::update(float fDt) {
+
+	INKFluidParticleSystem::update(fDt);
+}

@@ -2,13 +2,14 @@
 	INKPhysicSolid.cpp - @Jijidici - 27/01/2014
 ************************************************************************ */
 
+#include <gtx/rotate_vector.hpp>
 #include "physics/INKPhysicSolid.h"
-
 #include "renderer/shapes/INKCustomShape.h"
 
 INKPhysicSolid::INKPhysicSolid(std::vector<glm::vec3>& vertices, float elasticity)
 	: _vertices(vertices)
-	, _fElasticity(elasticity) 
+	, _fElasticity(elasticity)
+	, _fAngle(0.f)
 	, _pShape(nullptr) {
 	_pShape = new INKCustomShape();
 
@@ -34,13 +35,13 @@ INKPhysicSolid::~INKPhysicSolid() {
 void INKPhysicSolid::computeCollision(glm::vec3 partPos, float fPartMass, glm::vec3 partNextPos, glm::vec3 partNextVel, float fDt, glm::vec3& partForce) {
 	for(unsigned int i=0; i<_vertices.size(); ++i) {
 
-			glm::vec2 vtxA = glm::vec2(_vertices[i].x, _vertices[i].y);
+		glm::vec2 vtxA = glm::rotate(glm::vec2(_vertices[i].x, _vertices[i].y), _fAngle);
 
 			glm::vec2 vtxB;
 			if(i+1 == _vertices.size()) {
-				vtxB = glm::vec2(_vertices[0].x, _vertices[0].y);
+				vtxB = glm::rotate(glm::vec2(_vertices[0].x, _vertices[0].y), _fAngle);
 			} else {
-				vtxB = glm::vec2(_vertices[i+1].x, _vertices[i+1].y);
+				vtxB = glm::rotate(glm::vec2(_vertices[i+1].x, _vertices[i+1].y), _fAngle);
 			}
 
 			glm::vec2 vecNormale(0.f);

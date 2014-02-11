@@ -8,10 +8,13 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 
 INKHexagon::INKHexagon(int iSegmentCount, float fRadius) 
 	: _iSegmentCount(iSegmentCount)
-	, _fRadius(fRadius) {
+	, _fRadius(fRadius)
+	, _fAngle(0.f) {
 	float fStepAngle = (2.f*M_PI)/static_cast<float>(iSegmentCount);
 	for(int i=0; i<iSegmentCount; ++i) {
 		float fCurrentAlpha = i*fStepAngle;
@@ -65,5 +68,12 @@ void INKHexagon::computeCollision(glm::vec3 partPos, float fPartMass, glm::vec3 
 				_segments[i]->computeCollision(partPos, fPartMass, partNextPos, partNextVel, fDt, partForce);
 			}
 		}
+	}
+}
+
+void INKHexagon::setAngle(float fAngle) {
+	_fAngle = fAngle;
+	for(unsigned int i=0; i<_segments.size(); ++i) {
+		_segments[i]->setAngle(fAngle);
 	}
 }

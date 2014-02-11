@@ -2,8 +2,11 @@
 	INKApp.cpp - @Jijidici - 09/01/2014
 ************************************************************************ */
 
+#define _USE_MATH_DEFINES
+
 #include "system/INKApp.h"
 
+#include <cmath>
 #include "SDL.h"
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
@@ -69,6 +72,7 @@ void INKApp::launch() {
 
 		INKEventManager::getInstance()->manageEvent(_pMainFrame);
 
+		_pPartSystem->rotateUpperHexagon(10.f);
 		_pPartSystem->update(fDt);
 
 		fDt = _pMainFrame->computeFrameTime();

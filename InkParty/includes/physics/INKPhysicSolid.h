@@ -20,6 +20,8 @@ public:
 	float	getElasticity() const { return _fElasticity; }
 	void	setElasticity(float elasticity) { _fElasticity = elasticity; }
 
+	void	setAngle(float fAngle) { _fAngle = fAngle; }
+
 	INKCustomShape*	getShape() { return _pShape; }
 
 protected:
@@ -27,6 +29,7 @@ protected:
 
 	std::vector<glm::vec3>	_vertices;
 	float					_fElasticity;
+	float					_fAngle;
 	INKCustomShape*			_pShape;
 };
 

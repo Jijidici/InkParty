@@ -84,6 +84,8 @@ void INKRenderer::render() {
 		}
 
 		for(std::vector<INKHexagon*>::iterator itHex=(*itRend)->getHexagons().begin(); itHex!=(*itRend)->getHexagons().end(); ++itHex) {
+			glm::mat4 modelMatrix = glm::rotate(glm::mat4(1.f), (*itHex)->getAngle(), glm::vec3(0.f, 0.f, 1.f));
+			pDefaultProgram->sendModelUniform(modelMatrix);
 			(*itHex)->draw();
 		}
 

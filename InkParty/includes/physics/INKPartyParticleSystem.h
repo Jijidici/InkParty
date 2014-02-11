@@ -12,6 +12,9 @@ public:
 	INKPartyParticleSystem();
 
 	void init();
+	void update(float fDt);
+
+	void rotateUpperHexagon(float fAngle) { _hexagons[1]->setAngle(fAngle); };
 };
 
 #endif //__INK_PARTY_PARTICLE_SYSTEM__
