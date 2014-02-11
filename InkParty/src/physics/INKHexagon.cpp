@@ -26,8 +26,6 @@ INKHexagon::INKHexagon(int iSegmentCount, float fRadius)
 		_segments.push_back(new INKPhysicSolid(points, 1.f));
 		_showSeg.push_back(true);
 	}
-
-	hideSegments(_iSegmentCount-1);
 }
 
 INKHexagon::~INKHexagon() {

@@ -54,27 +54,8 @@ void INKApp::init() {
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	_pPartSystem = new INKFluidParticleSystem(256, 0.3f, 20, static_cast<int>(20.f*_pMainFrame->getRatio()), 0.5f);
-	_pPartSystem->setSpringRigidity(5.f, 2.f);
-	_pPartSystem->setSpringLengths(0.3f, 0.3f);
-	_pPartSystem->setBrakeCoef(0.00001f);
-	_pPartSystem->setInfluenceDelta(0.2f);
-	_pPartSystem->addForce(new INKAttractiveForce(glm::vec3(0.f), 1.5f, 2.f));
-	_pPartSystem->addSpawner(glm::vec3(0.f, 10.f, 0.f));
-	_pPartSystem->addSpawner(glm::vec3(-10.f, 0.f, 0.f));
-	_pPartSystem->addSpawner(glm::vec3(0.f, -10.f, 0.f));
-	_pPartSystem->addSpawner(glm::vec3(10.f, 0.f, 0.f));
-	_pPartSystem->addWell(glm::vec3(0.f, 0.f, 0.f));
-	_pPartSystem->addHexagon(new INKHexagon(8, 2.f));
-	_pPartSystem->addHexagon(new INKHexagon(10, 4.f));
-	_pPartSystem->addHexagon(new INKHexagon(12, 6.f));
+	_pPartSystem = new INKPartyParticleSystem();
 	INKRenderer::getInstance()->add(_pPartSystem);
-
-	INKRenderable* pMainWell = new INKRenderable(INKRenderer::getInstance()->getSquare());
-	pMainWell->setScale(glm::vec3(2.5f));
-	pMainWell->setProgram(INKRenderer::getInstance()->getShader("well"));
-	INKRenderer::getInstance()->add(pMainWell);
-
 	//test zone
 }
 
