@@ -9,6 +9,7 @@
 #include <utility>
 #include "glm.hpp"
 #include "physics/INKParticleSystem.h"
+#include "physics/INKLink.h"
 
 class INKGooParticleSystem : public INKParticleSystem {
 public:
@@ -18,14 +19,14 @@ public:
 
 	bool addOneParticle(glm::vec3 position);
 
-	std::vector<std::pair<int, int>>& getGraph() { return _graph; }
+	std::vector<INKLink>& getGraph() { return _graph; }
 
 protected:
 	void init();
 
 	float _fPartDist;
 	float _fDeltaDist;
-	std::vector<std::pair<int, int>> _graph;
+	std::vector<INKLink> _graph;
 };
 
 #endif

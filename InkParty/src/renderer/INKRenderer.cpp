@@ -19,6 +19,7 @@
 #include "renderer/shaders/fs_line.h"
 #include "physics/INKParticle.h"
 #include "physics/INKPhysicSolid.h"
+#include "physics/INKLink.h"
 
 #define POSITION_LOCATION 0
 
@@ -144,12 +145,12 @@ void INKRenderer::render() {
 }
 
 void INKRenderer::drawLinks(INKGooParticleSystem* pSystem) {
-	std::vector<std::pair<int, int>> systemGraph = pSystem->getGraph();
+	std::vector<INKLink> systemGraph = pSystem->getGraph();
 
 	std::vector<glm::vec3> linePoints;
-	for(std::vector<std::pair<int, int>>::iterator itLink=systemGraph.begin(); itLink!=systemGraph.end(); ++itLink) {
-		linePoints.push_back(pSystem->getPosition(itLink->first));
-		linePoints.push_back(pSystem->getPosition(itLink->second));
+	for(std::vector<INKLink>::iterator itLink=systemGraph.begin(); itLink!=systemGraph.end(); ++itLink) {
+		linePoints.push_back(pSystem->getPosition(itLink->getP1Id()));
+		linePoints.push_back(pSystem->getPosition(itLink->getP2Id()));
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, _lineVBO);
