@@ -5,14 +5,21 @@
 #include "physics/INKGooParticleSystem.h"
 #include "physics/INKPhysicSolid.h"
 #include "physics/forces/INKConstantForce.h"
-#include "physics/forces/INKHookForce.h"
-#include "physics/forces/INKBrakeForce.h"
+#include "physics/forces/INKDynamicSpringForce.h"
 
 INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, float fPartDist, float fDeltaDist)
 	: INKParticleSystem(iMaxCount, fStandardMass)
 	, _fPartDist(fPartDist)
 	, _fDeltaDist(fDeltaDist) {
 	init();
+}
+
+void INKGooParticleSystem::update(float fDt) {
+	for(std::vector<std::pair<int, int>>::iterator it=_graph.begin(); it!=_graph.end(); ++it) {
+		INKDynamicSpringForce::getInstance()->apply(this, it->first, it->second, 10.f, _fPartDist, 0.1f, fDt);
+	}
+
+	INKParticleSystem::update(fDt);
 }
 
 bool INKGooParticleSystem::addOneParticle(glm::vec3 position) {

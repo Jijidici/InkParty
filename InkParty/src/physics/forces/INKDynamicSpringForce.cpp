@@ -32,4 +32,5 @@ void INKDynamicSpringForce::apply(INKParticleSystem* pSystem, int iP1Id, int iP2
 	}
 
 	pSystem->accumForce(iP1Id, forceHook+brakeForce);
+	pSystem->accumForce(iP2Id, -(forceHook+brakeForce));
 }

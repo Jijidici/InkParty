@@ -13,6 +13,8 @@
 class INKGooParticleSystem : public INKParticleSystem {
 public:
 	INKGooParticleSystem(int iMaxCount, float fStandardMass, float fPartDist, float fDeltaDist);
+	
+	virtual void update(float fDt);
 
 	bool addOneParticle(glm::vec3 position);
 
