@@ -14,6 +14,7 @@
 #include "renderer/shapes/INKSquareShape.h"
 #include "system/INKCamera.h"
 #include "physics/INKParticleSystem.h"
+#include "physics/INKGooParticleSystem.h"
 
 class INKRenderer {
 public:
@@ -36,12 +37,16 @@ protected:
 	~INKRenderer();
 
 	void			init();
+	void			drawLinks(INKGooParticleSystem* pSystem);
 
 	INKSquareShape* _pSquareModel;
 	INKCamera* _pCurrentCamera;
 	std::map<std::string, INKGLProgram*> _shadersMap;
 	std::vector<INKParticleSystem*> _renderSystems;
 	std::vector<INKRenderable*> _renderRenderables;
+
+	GLuint _lineVBO;
+	GLuint _lineVAO;
 };
 
 #endif //__INK_RENDERER_H__

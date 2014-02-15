@@ -18,6 +18,8 @@ public:
 
 	bool addOneParticle(glm::vec3 position);
 
+	std::vector<std::pair<int, int>>& getGraph() { return _graph; }
+
 protected:
 	void init();
 

@@ -18,11 +18,15 @@
 #include "physics/INKParticle.h"
 #include "physics/INKPhysicSolid.h"
 
+#define POSITION_LOCATION 0
+
 static INKRenderer* _pInstance = nullptr;
 
 INKRenderer::INKRenderer() 
 	: _pSquareModel(nullptr) 
-	, _pCurrentCamera(nullptr) {
+	, _pCurrentCamera(nullptr)
+	, _lineVBO(0)
+	, _lineVAO(0) {
 
 }
 
@@ -40,6 +44,9 @@ INKRenderer::~INKRenderer() {
 	for(std::map<std::string, INKGLProgram*>::iterator it=_shadersMap.begin(); it!=_shadersMap.end(); ++it) {
 		delete it->second;
 	}
+
+	glDeleteBuffers(1, &_lineVBO);
+	glDeleteVertexArrays(1, &_lineVAO);
 
 	_renderSystems.clear();
 	_pInstance = nullptr;
@@ -66,6 +73,17 @@ void INKRenderer::init() {
 	addShader("default", inkshaders::vs_default, inkshaders::fs_default);
 	addShader("particles", inkshaders::vs_particle, inkshaders::fs_particle);
 	addShader("well", inkshaders::vs_well, inkshaders::fs_well);
+
+	// build geometries
+	glGenBuffers(1, &_lineVBO);
+	glGenVertexArrays(1, &_lineVAO);
+
+	glBindVertexArray(_lineVAO);
+	glEnableVertexAttribArray(POSITION_LOCATION);
+	glBindBuffer(GL_ARRAY_BUFFER, _lineVBO);
+	glVertexAttribPointer(POSITION_LOCATION, 3,  GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), reinterpret_cast<const GLvoid*>(0));
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void INKRenderer::render() {
@@ -76,6 +94,7 @@ void INKRenderer::render() {
 
 	for(std::vector<INKParticleSystem*>::iterator itRend=_renderSystems.begin(); itRend!=_renderSystems.end(); ++itRend) {
 
+		// render solids
 		INKGLProgram* pDefaultProgram = getShader("default");
 		pDefaultProgram->use();
 		pDefaultProgram->updateUniforms();
@@ -89,6 +108,7 @@ void INKRenderer::render() {
 			(*itHex)->draw();
 		}
 
+		//render particles
 		INKGLProgram* pParticleShader = getShader("particles");
 		pParticleShader->use();
 		pParticleShader->updateUniforms();
@@ -100,6 +120,13 @@ void INKRenderer::render() {
 
 			getSquare()->draw();
 		}
+
+		// render links
+		INKGooParticleSystem* pGooSystem = dynamic_cast<INKGooParticleSystem*>(*itRend);
+		if(pGooSystem != nullptr) {
+			getShader("default")->use();
+			drawLinks(pGooSystem);
+		}
 	}
 
 	for(std::vector<INKRenderable*>::iterator itRend=_renderRenderables.begin(); itRend!=_renderRenderables.end(); ++itRend) {
@@ -109,6 +136,28 @@ void INKRenderer::render() {
 	glDisable(GL_BLEND);
 
 	SDL_GL_SwapBuffers();
+}
+
+void INKRenderer::drawLinks(INKGooParticleSystem* pSystem) {
+	std::vector<std::pair<int, int>> systemGraph = pSystem->getGraph();
+
+	std::vector<glm::vec3> linePoints;
+	for(std::vector<std::pair<int, int>>::iterator itLink=systemGraph.begin(); itLink!=systemGraph.end(); ++itLink) {
+		linePoints.push_back(pSystem->getPosition(itLink->first));
+		linePoints.push_back(pSystem->getPosition(itLink->second));
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, _lineVBO);
+	glBufferData(GL_ARRAY_BUFFER, linePoints.size()*3*sizeof(GLfloat), &(linePoints[0]), GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	//glDisable(GL_DEPTH_TEST);
+
+	glBindVertexArray(_lineVAO);
+	glDrawArrays(GL_LINES, 0, linePoints.size());
+	glBindVertexArray(0);
+
+	//glEnable(GL_DEPTH_TEST);
 }
 
 void INKRenderer::addShader(std::string sTag, const GLchar* vsSource, const GLchar* fsSource) {
