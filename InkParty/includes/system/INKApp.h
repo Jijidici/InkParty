@@ -11,7 +11,7 @@
 #include "renderer/INKGLProgram.h"
 #include "event/INKEvent.h"
 #include "event/INKEventListener.h"
-#include "physics/INKPartyParticleSystem.h"
+#include "physics/INKGooParticleSystem.h"
 
 class INKApp : public INKEventListener {
 public:
@@ -31,7 +31,7 @@ private:
 
 	INKGLProgram*		_pParticleProgram;
 	INKCamera*			_pCamera;
-	INKPartyParticleSystem*	_pPartSystem;
+	INKGooParticleSystem*	_pPartSystem;
 };
 
 #endif

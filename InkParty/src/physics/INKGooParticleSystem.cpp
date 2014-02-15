@@ -1,0 +1,60 @@
+/* ***********************************************************************
+	INKGooParticleSystem.cpp - @Jijidici - 15/02/2014
+************************************************************************ */
+
+#include "physics/INKGooParticleSystem.h"
+#include "physics/INKPhysicSolid.h"
+#include "physics/forces/INKConstantForce.h"
+#include "physics/forces/INKHookForce.h"
+#include "physics/forces/INKBrakeForce.h"
+
+INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, float fPartDist, float fDeltaDist)
+	: INKParticleSystem(iMaxCount, fStandardMass)
+	, _fPartDist(fPartDist)
+	, _fDeltaDist(fDeltaDist) {
+	init();
+}
+
+bool INKGooParticleSystem::addOneParticle(glm::vec3 position) {
+	bool bToAdd = false;
+
+	//first particle
+	if(_iParticleCount == 0) {
+		bToAdd = true;
+	} else {
+		
+		for(int i=0; i<_iParticleCount; ++i) {
+			if(glm::distance(position, _positions[i]) <= _fPartDist+_fDeltaDist) {
+				bToAdd = true;
+				_graph.push_back(std::make_pair(i, _iParticleCount));
+			}
+		}
+	}
+
+	if(bToAdd) {
+		_positions.push_back(position);
+		_velocities.push_back(glm::vec3(0.f));
+		_forces.push_back(glm::vec3(0.f));
+		_mass.push_back(_fStandardMass);
+		++_iParticleCount;
+	}
+
+	return bToAdd;
+}
+
+void INKGooParticleSystem::init() {
+	this->addForce(new INKConstantForce(glm::vec3(0.f, -3.f, 0.f)));
+	
+	std::vector<glm::vec3> groundVertex;
+	groundVertex.push_back(glm::vec3(-10.f, -9.f, 0.f));
+	groundVertex.push_back(glm::vec3( 10.f, -9.f, 0.f));
+	groundVertex.push_back(glm::vec3( 10.f, -10.f, 0.f));
+	groundVertex.push_back(glm::vec3(-10.f, -10.f, 0.f));
+
+	this->addSolid(new INKPhysicSolid(groundVertex, 1.f));
+
+	// initial particles
+	this->addOneParticle(glm::vec3(-_fPartDist/2.f, -8.5f, 0.f));
+	this->addOneParticle(glm::vec3(_fPartDist/2.f, -8.5f, 0.f));
+	this->addOneParticle(glm::vec3(0.f, -8.5f+(_fPartDist*0.86602540378f), 0.f));
+}

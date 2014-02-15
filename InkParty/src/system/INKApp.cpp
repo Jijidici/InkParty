@@ -18,7 +18,8 @@
 #include "event/INKMouseMoveEvent.h"
 #include "physics/INKParticle.h"
 #include "physics/INKHexagon.h"
-#include "physics/forces/INKAttractiveForce.h"
+#include "physics/INKPhysicSolid.h"
+#include "physics/forces/INKConstantForce.h"
 
 INKApp::INKApp() 
 	: _pMainFrame(0)
@@ -43,15 +44,6 @@ void INKApp::onEvent(INKEvent* pE) {
 			_bLoop = false;
 		}
 	}
-
-	else if(pE->getType() == eMouseMoveEvent) {
-		INKMouseMoveEvent* pMouseMoveE = static_cast<INKMouseMoveEvent*>(pE);
-		if(pMouseMoveE->isLeftButtonPressed()) {
-			_pPartSystem->rotateUpperHexagon(pMouseMoveE->getMousePos().x);
-		}else if(pMouseMoveE->isRightButtonPressed()) {
-			_pPartSystem->rotateDownerHexagon(pMouseMoveE->getMousePos().x);
-		}
-	}
 }
 
 void INKApp::init() {
@@ -62,13 +54,12 @@ void INKApp::init() {
 	//events
 	INKEventManager::getInstance()->addListener(this, eQuitEvent);
 	INKEventManager::getInstance()->addListener(this, eKeyEvent);
-	INKEventManager::getInstance()->addListener(this, eMouseMoveEvent);
 
 	//test zone
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
 	INKRenderer::getInstance()->setCurrentCamera(_pCamera);
 
-	_pPartSystem = new INKPartyParticleSystem();
+	_pPartSystem = new INKGooParticleSystem(256, 0.3f, 2.f, 0.2f);
 	INKRenderer::getInstance()->add(_pPartSystem);
 	//test zone
 }
