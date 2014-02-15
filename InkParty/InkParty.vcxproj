@@ -15,6 +15,7 @@
     <ClCompile Include="src\event\INKEventListener.cpp" />
     <ClCompile Include="src\event\INKEventManager.cpp" />
     <ClCompile Include="src\event\INKKeyEvent.cpp" />
+    <ClCompile Include="src\event\INKMouseDownEvent.cpp" />
     <ClCompile Include="src\event\INKMouseMoveEvent.cpp" />
     <ClCompile Include="src\event\INKQuitEvent.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="includes\event\INKEventListener.h" />
     <ClInclude Include="includes\event\INKEventManager.h" />
     <ClInclude Include="includes\event\INKKeyEvent.h" />
+    <ClInclude Include="includes\event\INKMouseDownEvent.h" />
     <ClInclude Include="includes\event\INKMouseMoveEvent.h" />
     <ClInclude Include="includes\event\INKQuitEvent.h" />
     <ClInclude Include="includes\math\INKMatrixStack.h" />

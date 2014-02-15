@@ -16,7 +16,7 @@ INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, f
 
 void INKGooParticleSystem::update(float fDt) {
 	for(std::vector<std::pair<int, int>>::iterator it=_graph.begin(); it!=_graph.end(); ++it) {
-		INKDynamicSpringForce::getInstance()->apply(this, it->first, it->second, 10.f, _fPartDist, 0.1f, fDt);
+		INKDynamicSpringForce::getInstance()->apply(this, it->first, it->second, 10.f, _fPartDist, 0.01f, fDt);
 	}
 
 	INKParticleSystem::update(fDt);
@@ -25,16 +25,22 @@ void INKGooParticleSystem::update(float fDt) {
 bool INKGooParticleSystem::addOneParticle(glm::vec3 position) {
 	bool bToAdd = false;
 
-	//first particle
+	//first particles
 	if(_iParticleCount == 0) {
 		bToAdd = true;
 	} else {
-		
+		std::vector<std::pair<int, int>> toAddLinks;
 		for(int i=0; i<_iParticleCount; ++i) {
 			if(glm::distance(position, _positions[i]) <= _fPartDist+_fDeltaDist) {
-				bToAdd = true;
-				_graph.push_back(std::make_pair(i, _iParticleCount));
+				toAddLinks.push_back(std::make_pair(i, _iParticleCount));
 			}
+		}
+
+		if(toAddLinks.size() >= 2 || _iParticleCount < 3) {
+			for(std::vector<std::pair<int, int>>::iterator it=toAddLinks.begin(); it!=toAddLinks.end(); ++it) {
+				_graph.push_back(*it);
+			}
+			bToAdd = true;
 		}
 	}
 

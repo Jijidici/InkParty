@@ -9,6 +9,7 @@
 enum EEventType {
 	eQuitEvent,
 	eKeyEvent,
+	eMouseDownEvent,
 	eMouseMoveEvent
 };
 

@@ -141,6 +141,9 @@
     <ClCompile Include="src\physics\INKGooParticleSystem.cpp">
       <Filter>Fichiers sources\physics</Filter>
     </ClCompile>
+    <ClCompile Include="src\event\INKMouseDownEvent.cpp">
+      <Filter>Fichiers sources\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\system\INKApp.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="includes\physics\INKGooParticleSystem.h">
       <Filter>Fichiers d%27en-tête\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\event\INKMouseDownEvent.h">
+      <Filter>Fichiers d%27en-tête\event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

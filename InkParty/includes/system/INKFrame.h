@@ -21,6 +21,8 @@ public:
 	inline void	setFPS				(int iFps) { _iFps = iFps; _iFrameDuration = 1000 / iFps; }
 	float		computeFrameTime	();
 	float		getRatio			() { return static_cast<float>(_iH)/static_cast<float>(_iW); }
+	int			getWidth			() { return _iW; }
+	int			getHeight			() { return _iH; }
 
 protected:
 	std::string _strTitle;

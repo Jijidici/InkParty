@@ -8,6 +8,7 @@
 #include "event/INKEventListener.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
+#include "event/INKMouseDownEvent.h"
 #include "event/INKMouseMoveEvent.h"
 
 static INKEventManager* _pInstance = nullptr;
@@ -30,6 +31,10 @@ void INKEventManager::addListener(INKEventListener* pListener, EEventType type) 
 		_keyEventListeners.push_back(pListener);
 		break;
 
+	case eMouseDownEvent:
+		_mouseDownEventListeners.push_back(pListener);
+		break;
+
 	case eMouseMoveEvent:
 		_mouseMoveEventListeners.push_back(pListener);
 		break;
@@ -49,6 +54,10 @@ bool INKEventManager::removeListener(INKEventListener* pListener, EEventType typ
 
 	case eKeyEvent:
 		vectorToWorkOn = _keyEventListeners;
+		break;
+
+	case eMouseDownEvent:
+		vectorToWorkOn = _mouseDownEventListeners;
 		break;
 
 	case eMouseMoveEvent:
@@ -80,6 +89,10 @@ void INKEventManager::manageEvent(INKFrame* pMainFrame) {
 
 			case SDL_KEYDOWN:
 				sendEvent(new INKKeyEvent(e.key.keysym), _keyEventListeners);
+				break;
+
+			case SDL_MOUSEBUTTONDOWN:
+				sendEvent(new INKMouseDownEvent(glm::vec2(e.button.x, e.button.y), SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1), SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(3)), _mouseDownEventListeners);
 				break;
 
 			case SDL_MOUSEMOTION:

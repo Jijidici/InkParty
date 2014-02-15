@@ -15,7 +15,7 @@
 #include "event/INKEventManager.h"
 #include "event/INKQuitEvent.h"
 #include "event/INKKeyEvent.h"
-#include "event/INKMouseMoveEvent.h"
+#include "event/INKMouseDownEvent.h"
 #include "physics/INKParticle.h"
 #include "physics/INKHexagon.h"
 #include "physics/INKPhysicSolid.h"
@@ -44,6 +44,16 @@ void INKApp::onEvent(INKEvent* pE) {
 			_bLoop = false;
 		}
 	}
+
+	else if(pE->getType() == eMouseDownEvent) {
+		INKMouseDownEvent* pMouseDownE = static_cast<INKMouseDownEvent*>(pE);
+		glm::vec3 clickPos;
+		clickPos.x = (pMouseDownE->getMousePos().x/_pMainFrame->getWidth())*2.f -1.f;
+		clickPos.y = -((pMouseDownE->getMousePos().y/_pMainFrame->getHeight())*2.f -1.f);
+		clickPos.z = 0.f;
+
+		_pPartSystem->addOneParticle(10.f*clickPos);
+	}
 }
 
 void INKApp::init() {
@@ -54,6 +64,7 @@ void INKApp::init() {
 	//events
 	INKEventManager::getInstance()->addListener(this, eQuitEvent);
 	INKEventManager::getInstance()->addListener(this, eKeyEvent);
+	INKEventManager::getInstance()->addListener(this, eMouseDownEvent);
 
 	//test zone
 	_pCamera = new INKCamera(_pMainFrame->getRatio());
