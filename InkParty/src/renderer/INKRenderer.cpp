@@ -15,6 +15,8 @@
 #include "renderer/shaders/fs_particle.h"
 #include "renderer/shaders/vs_well.h"
 #include "renderer/shaders/fs_well.h"
+#include "renderer/shaders/vs_line.h"
+#include "renderer/shaders/fs_line.h"
 #include "physics/INKParticle.h"
 #include "physics/INKPhysicSolid.h"
 
@@ -73,6 +75,7 @@ void INKRenderer::init() {
 	addShader("default", inkshaders::vs_default, inkshaders::fs_default);
 	addShader("particles", inkshaders::vs_particle, inkshaders::fs_particle);
 	addShader("well", inkshaders::vs_well, inkshaders::fs_well);
+	addShader("line", inkshaders::vs_line, inkshaders::fs_line);
 
 	// build geometries
 	glGenBuffers(1, &_lineVBO);
@@ -124,7 +127,9 @@ void INKRenderer::render() {
 		// render links
 		INKGooParticleSystem* pGooSystem = dynamic_cast<INKGooParticleSystem*>(*itRend);
 		if(pGooSystem != nullptr) {
-			getShader("default")->use();
+			INKGLProgram* pLineShader = getShader("line");
+			pLineShader->use();
+			pLineShader->updateUniforms();
 			drawLinks(pGooSystem);
 		}
 	}
@@ -151,13 +156,11 @@ void INKRenderer::drawLinks(INKGooParticleSystem* pSystem) {
 	glBufferData(GL_ARRAY_BUFFER, linePoints.size()*3*sizeof(GLfloat), &(linePoints[0]), GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	//glDisable(GL_DEPTH_TEST);
+	glLineWidth(2.f);
 
 	glBindVertexArray(_lineVAO);
 	glDrawArrays(GL_LINES, 0, linePoints.size());
 	glBindVertexArray(0);
-
-	//glEnable(GL_DEPTH_TEST);
 }
 
 void INKRenderer::addShader(std::string sTag, const GLchar* vsSource, const GLchar* fsSource) {

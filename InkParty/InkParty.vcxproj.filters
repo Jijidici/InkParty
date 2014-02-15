@@ -245,5 +245,11 @@
     <ClInclude Include="includes\event\INKMouseDownEvent.h">
       <Filter>Fichiers d%27en-tête\event</Filter>
     </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\fs_line.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\renderer\shaders\vs_line.h">
+      <Filter>Fichiers d%27en-tête\renderer\shaders</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
