@@ -22,6 +22,24 @@ void INKGooParticleSystem::update(float fDt) {
 	INKParticleSystem::update(fDt);
 }
 
+void INKGooParticleSystem::reset() {
+	_positions.clear();
+	_velocities.clear();
+	_forces.clear();
+	_mass.clear();
+	_iParticleCount = 0;
+
+	_graph.clear();
+
+	_spawners.clear();
+	_wells.clear();
+	_solids.clear();
+	_hexagons.clear();
+	_forcesToApply.clear();
+
+	init();
+}
+
 bool INKGooParticleSystem::addOneParticle(glm::vec3 position) {
 	bool bToAdd = false;
 

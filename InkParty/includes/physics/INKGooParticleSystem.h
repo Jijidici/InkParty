@@ -16,6 +16,7 @@ public:
 	INKGooParticleSystem(int iMaxCount, float fStandardMass, float fPartDist, float fDeltaDist);
 	
 	virtual void update(float fDt);
+	void reset();
 
 	bool addOneParticle(glm::vec3 position);
 

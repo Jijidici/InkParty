@@ -43,6 +43,9 @@ void INKApp::onEvent(INKEvent* pE) {
 		if(pKeyE->getKey().unicode != 0 && pKeyE->getKey().unicode == 'q') {
 			_bLoop = false;
 		}
+		else if(pKeyE->getKey().sym == SDLK_SPACE) {
+			_pPartSystem->reset();
+		}
 	}
 
 	else if(pE->getType() == eMouseDownEvent) {
