@@ -7,6 +7,7 @@
 #include "system/INKApp.h"
 
 #include <cmath>
+#include <iostream>
 #include "SDL.h"
 #include "glm.hpp"
 #include "renderer/INKRenderer.h"
@@ -45,6 +46,19 @@ void INKApp::onEvent(INKEvent* pE) {
 		}
 		else if(pKeyE->getKey().sym == SDLK_SPACE) {
 			_pPartSystem->reset();
+		}
+		else if(pKeyE->getKey().sym == 'e') {
+			float fSpringStrength = _pPartSystem->getSpringStrength();
+			fSpringStrength+=2.f;
+			_pPartSystem->setSpringStrength(fSpringStrength);
+			std::cout << ">> Spring rigidity : " << fSpringStrength << std::endl;
+		}
+		else if(pKeyE->getKey().sym == 'd') {
+			float fSpringStrength = _pPartSystem->getSpringStrength();
+			fSpringStrength-=2.f;
+			if(fSpringStrength < 0.f) { fSpringStrength = 0.f; }
+			_pPartSystem->setSpringStrength(fSpringStrength);
+			std::cout << ">> Spring rigidity : " << fSpringStrength << std::endl;
 		}
 	}
 

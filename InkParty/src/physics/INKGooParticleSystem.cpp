@@ -9,6 +9,7 @@
 
 INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, float fPartDist, float fDeltaDist)
 	: INKParticleSystem(iMaxCount, fStandardMass)
+	, _fSpringStrength(15.f)
 	, _fPartDist(fPartDist)
 	, _fDeltaDist(fDeltaDist) {
 	init();
@@ -16,7 +17,7 @@ INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, f
 
 void INKGooParticleSystem::update(float fDt) {
 	for(std::vector<INKLink>::iterator it=_graph.begin(); it!=_graph.end(); ++it) {
-		INKDynamicSpringForce::getInstance()->apply(this, it->getP1Id(), it->getP2Id(), 10.f, it->getLength(), 0.01f, fDt);
+		INKDynamicSpringForce::getInstance()->apply(this, it->getP1Id(), it->getP2Id(), _fSpringStrength, it->getLength(), 0.01f, fDt);
 	}
 
 	INKParticleSystem::update(fDt);

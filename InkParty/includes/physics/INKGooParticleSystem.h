@@ -20,11 +20,14 @@ public:
 
 	bool addOneParticle(glm::vec3 position);
 
+	float getSpringStrength() { return _fSpringStrength; }
+	void setSpringStrength(float fStrength) { _fSpringStrength = fStrength; }
 	std::vector<INKLink>& getGraph() { return _graph; }
 
 protected:
 	void init();
 
+	float _fSpringStrength;
 	float _fPartDist;
 	float _fDeltaDist;
 	std::vector<INKLink> _graph;
