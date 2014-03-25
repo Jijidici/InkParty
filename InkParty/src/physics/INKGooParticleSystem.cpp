@@ -10,6 +10,7 @@
 INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, float fPartDist, float fDeltaDist)
 	: INKParticleSystem(iMaxCount, fStandardMass)
 	, _fSpringStrength(15.f)
+	, _fAddedLength(1.f)
 	, _fPartDist(fPartDist)
 	, _fDeltaDist(fDeltaDist) {
 	init();
@@ -17,7 +18,11 @@ INKGooParticleSystem::INKGooParticleSystem(int iMaxCount, float fStandardMass, f
 
 void INKGooParticleSystem::update(float fDt) {
 	for(std::vector<INKLink>::iterator it=_graph.begin(); it!=_graph.end(); ++it) {
-		INKDynamicSpringForce::getInstance()->apply(this, it->getP1Id(), it->getP2Id(), _fSpringStrength, it->getLength(), 0.01f, fDt);
+		float fLength = it->getLength() * _fAddedLength;
+		if(fLength < 0.f) {
+			fLength = 0.f;
+		}
+		INKDynamicSpringForce::getInstance()->apply(this, it->getP1Id(), it->getP2Id(), _fSpringStrength, fLength, 0.01f, fDt);
 	}
 
 	INKParticleSystem::update(fDt);
@@ -29,6 +34,8 @@ void INKGooParticleSystem::reset() {
 	_forces.clear();
 	_mass.clear();
 	_iParticleCount = 0;
+	_fSpringStrength = 15.f;
+	_fAddedLength = 1.f;
 
 	_graph.clear();
 
@@ -51,7 +58,7 @@ bool INKGooParticleSystem::addOneParticle(glm::vec3 position) {
 		std::vector<INKLink> toAddLinks;
 		for(int i=0; i<_iParticleCount; ++i) {
 			float fFromPartDist = glm::distance(position, _positions[i]);
-			if(fFromPartDist <= _fPartDist+_fDeltaDist) {
+			if(fFromPartDist <= (_fPartDist+_fDeltaDist)*std::max(0.f, _fAddedLength)) {
 				INKLink newLink(i, _iParticleCount, fFromPartDist);
 				toAddLinks.push_back(newLink);
 			}

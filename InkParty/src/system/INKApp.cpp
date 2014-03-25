@@ -51,15 +51,30 @@ void INKApp::onEvent(INKEvent* pE) {
 			float fSpringStrength = _pPartSystem->getSpringStrength();
 			fSpringStrength+=2.f;
 			_pPartSystem->setSpringStrength(fSpringStrength);
-			std::cout << ">> Spring rigidity : " << fSpringStrength << std::endl;
 		}
 		else if(pKeyE->getKey().sym == 'd') {
 			float fSpringStrength = _pPartSystem->getSpringStrength();
 			fSpringStrength-=2.f;
 			if(fSpringStrength < 0.f) { fSpringStrength = 0.f; }
 			_pPartSystem->setSpringStrength(fSpringStrength);
-			std::cout << ">> Spring rigidity : " << fSpringStrength << std::endl;
 		}
+		else if(pKeyE->getKey().sym == 'r') {
+			float fLength = _pPartSystem->getAddedLength();
+			fLength+=0.1f;
+			_pPartSystem->setAddedLength(fLength);
+		}
+		else if(pKeyE->getKey().sym == 'f') {
+			float fLength = _pPartSystem->getAddedLength();
+			fLength-=0.1f;
+			if(fLength < 0.f) {
+				fLength = 0.f;
+			}
+			_pPartSystem->setAddedLength(fLength);
+		}
+		
+		std::cout << ">> Spring rigidity : " << _pPartSystem->getSpringStrength() << std::endl;
+		std::cout << ">> Spring added length : " << _pPartSystem->getAddedLength() << std::endl;
+		std::cout << std::endl;
 	}
 
 	else if(pE->getType() == eMouseDownEvent) {
